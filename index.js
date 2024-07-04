@@ -62,3 +62,5 @@ for (let i = 0; i < recipeObject.ingredients.length; i++) {
   LI.innerHTML = `${recipeObject.ingredients[i].NAME}: ${recipeObject.ingredients[i].AMOUNT}`;
   ingredientsUL.appendChild(LI);
 }
+
+// Recipe card end
