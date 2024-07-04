@@ -17,6 +17,44 @@ const recipeObject = {
   description: "Mix everything, heat it, and you are good to go!",
 };
 
-const recipeContainer = document.getElementById("recipe");
+// Recipe Card start
 
-console.log(recipeContainer);
+// Create title element
+const recipeContainer = document.getElementById("recipeCard");
+const title = document.createElement("h1");
+title.setAttribute("id", "recipeTitle");
+title.innerText = recipeObject.title;
+recipeContainer.appendChild(title);
+
+// create img element
+const image = document.createElement("img");
+image.src = recipeObject.picture_url;
+image.alt = recipeObject.title;
+image.width = 200;
+image.height = 200;
+recipeContainer.appendChild(image);
+
+// create Description
+
+const recipeDiscription = document.createElement("div");
+recipeDiscription.classList = "card-details";
+recipeDiscription.id = "discriptin";
+recipeContainer.appendChild(recipeDiscription);
+const recipeText = document.createElement("h2");
+recipeText.innerText = recipeObject.description;
+recipeDiscription.appendChild(recipeText);
+
+// create ingredients list
+
+// create container for ingridiant list
+const ingredientsList = document.createElement("div");
+ingredientsList.classList = "ingridiantlist";
+recipeContainer.appendChild(ingredientsList);
+
+// create UL eliment for ingridiant list
+const ingredientsUL = document.createElement("ul");
+ingredientsList.appendChild(ingredientsUL);
+
+// create Li for UL ingridiant list
+
+
