@@ -10,10 +10,26 @@
     <div class="Container" id="mainContainer">
       <h1>Recipe App</h1>
       <!-- start card for display recipe-->
-      <div id="recipeCard">
-        
-      </div>
+      <div id="recipeCard"></div>
       <!--End of card-->
+
+      <!-- start Form for recipe-->
+
+      <div id="recipeForm">
+        <form action="">
+          <label for="recipeTitle">Recipe Name</label>
+          <input type="text" id="recipeTitle" name="title" required />
+          <label for="imageuplode">Picture</label>
+          <input type="file" id="imageuplode" name="uplode" />
+          <br /><br />
+          <fieldset id="fieldset">
+            <h1>Ingredients</h1>
+            <button type="button" id="bTnIngredients">Add Ingredients</button>
+          </fieldset>
+        </form>
+      </div>
+
+      <!--End of Form-->
     </div>
   </body>
   <script src="index.js"></script>

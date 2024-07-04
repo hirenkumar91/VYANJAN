@@ -63,4 +63,37 @@ for (let i = 0; i < recipeObject.ingredients.length; i++) {
   ingredientsUL.appendChild(LI);
 }
 
-// Recipe card end
+// Recipe card end //
+
+// form start
+
+// start button for adding ingredients
+const bTn = document
+  .getElementById("bTnIngredients")
+  .addEventListener("click", function () {
+    const Fild = document.getElementById("fieldset");
+    const fieldDiv = document.createElement("div");
+    fieldDiv.setAttribute("id", "ingridiantList");
+    Fild.appendChild(fieldDiv);
+
+    const fieldSet = document.getElementById("ingridiantList");
+
+    // name field
+    const NameFild = document.createElement("input");
+    NameFild.setAttribute("id", "ingridiant1");
+    NameFild.setAttribute("placeholder", "Insert Ingridiant Name");
+    NameFild.setAttribute("type", "text");
+    NameFild.setAttribute("required", "");
+    fieldSet.appendChild(NameFild);
+
+    // ammount field
+    const inputAmmount = document.createElement("input");
+    inputAmmount.setAttribute("id", "ingrediantAmmount");
+    inputAmmount.setAttribute("placeholder", "Ammount");
+    inputAmmount.setAttribute("type", "text");
+    inputAmmount.setAttribute("required", "");
+    fieldSet.appendChild(inputAmmount);
+  });
+//start button for adding ingredients
+
+//Form End
