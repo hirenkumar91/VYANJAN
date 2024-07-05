@@ -118,10 +118,6 @@ function countClick() {
     highlighter.style.color = "green";
   }
 }
-
-function onPageLoad() {
-  countClick();
-}
 // Add event listener to the click button
 bTnclickCount.addEventListener("click", countClick);
 
