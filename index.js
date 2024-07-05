@@ -107,8 +107,12 @@ function countClick() {
   // Enable or disable the submit button based on click count
   if (clickCount < 5) {
     submitButton.setAttribute("disabled", ""); // Disable the button
+    const higlighter = document.getElementById("text-worning");
+    higlighter.style.color = "red";
   } else {
     submitButton.removeAttribute("disabled"); // Enable the button
+    const higlighter = document.getElementById("text-worning");
+    higlighter.style.color = "green";
   }
 }
 
