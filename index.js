@@ -50,7 +50,7 @@ recipeDiscription.appendChild(recipeText);
 
 // create container for ingredients list
 const ingredientsList = document.createElement("div");
-ingredientsList.classList = "ingridiantlist";
+ingredientsList.classList = "ingridientlist";
 recipeContainer.appendChild(ingredientsList);
 
 // create UL element for ingredients list
@@ -59,9 +59,9 @@ ingredientsList.appendChild(ingredientsUL);
 
 // create Li for UL ingredients list using for Loop
 
-for (let i = 0; i < recipeObject.ingredients.length; i++) {
+for (let i = 0; i < recipeObject[0].ingredients.length; i++) {
   const LI = document.createElement("li");
-  LI.innerHTML = `${recipeObject.ingredients[i].NAME}: ${recipeObject.ingredients[i].AMOUNT}`;
+  LI.innerHTML = `${recipeObject[0].ingredients[i].NAME}: ${recipeObject[0].ingredients[i].AMOUNT}`;
   ingredientsUL.appendChild(LI);
 }
 
@@ -71,9 +71,9 @@ for (let i = 0; i < recipeObject.ingredients.length; i++) {
 
 // start : button for adding ingredients
 const bTn = document
-  .getElementById("bTnIngredients")
+  .getElementById("btnIngredients")
   .addEventListener("click", function () {
-    const Fild = document.getElementById("fieldset");
+    const Fild = document.getElementById("ingredientFieldset");
     const fieldDiv = document.createElement("div");
     fieldDiv.setAttribute("id", "ingridiantList${clickCount()}");
     Fild.appendChild(fieldDiv);
@@ -82,7 +82,7 @@ const bTn = document
 
     // name field
     const NameFild = document.createElement("input");
-    NameFild.setAttribute("id", "ingridiant1");
+    NameFild.setAttribute("id", "ingridiant");
     NameFild.setAttribute("placeholder", "Insert Ingridiant Name");
     NameFild.setAttribute("type", "text");
     NameFild.setAttribute("required", "");
@@ -102,9 +102,9 @@ const bTn = document
 let clickCount = 0;
 
 // Get the button elements
-const bTnclickCount = document.getElementById("bTnIngredients");
+const bTnclickCount = document.getElementById("btnIngredients");
 const submitButton = document.getElementById("submitbTn");
-const highlighter = document.getElementById("text-worning");
+const highlighter = document.getElementById("text-warning");
 
 function countClick() {
   clickCount++;

@@ -19,27 +19,19 @@
         <h1>-- Your recipe--</h1>
 
         <form>
-          <input
-            type="number"
-            inputmode="numeric"
-            id="inNumeric"
-            name="id"
-            value="countClick()"
-            hidden
-          />
           <label for="recipeTitle">Recipe Name</label>
           <input type="text" id="recipeTitle" name="title" required />
           <label for="imageUplode">Picture</label>
           <input type="file" id="imageUplode" name="upload" />
           <br /><br />
-          <fieldset id="fieldset">
+          <fieldset id="ingredientFieldset">
             <h1>Ingredients</h1>
-            <button type="button" id="bTnIngredients" required>
+            <button type="button" id="btnIngredients" required>
               Add Ingredients
-              <span id="text-worning">Minimum 5 Ingredients</span>
+              <span id="text-warning">Minimum 5 Ingredients</span>
             </button>
           </fieldset>
-          <label for="discription">Discription</label>
+          <label for="discription">Description</label>
           <textarea
             name="text"
             id="discription"
