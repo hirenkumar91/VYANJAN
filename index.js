@@ -67,13 +67,14 @@ for (let i = 0; i < recipeObject.ingredients.length; i++) {
 
 // form start
 
-// start button for adding ingredients
+// start : button for adding ingredients
 const bTn = document
   .getElementById("bTnIngredients")
   .addEventListener("click", function () {
     const Fild = document.getElementById("fieldset");
     const fieldDiv = document.createElement("div");
     fieldDiv.setAttribute("id", "ingridiantList");
+
     Fild.appendChild(fieldDiv);
 
     const fieldSet = document.getElementById("ingridiantList");
@@ -94,6 +95,28 @@ const bTn = document
     inputAmmount.setAttribute("required", "");
     fieldSet.appendChild(inputAmmount);
   });
-//start button for adding ingredients
+// Start: function to enable & disable button on adding minimum 5 ingridiants.
+
+// Click counter
+let clickCount = 0;
+
+function countClick() {
+  clickCount++;
+  console.log(clickCount);
+
+  // Enable or disable the submit button based on click count
+  if (clickCount < 5) {
+    submitButton.setAttribute("disabled", ""); // Disable the button
+  } else {
+    submitButton.removeAttribute("disabled"); // Enable the button
+  }
+}
+
+// Get the button elements
+const bTnclickCount = document.getElementById("bTnIngredients");
+const submitButton = document.getElementById("submitbTn");
+
+// Add event listener to the click button
+bTnclickCount.addEventListener("click", countClick);
 
 //Form End
