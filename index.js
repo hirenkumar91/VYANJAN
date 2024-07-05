@@ -19,53 +19,59 @@ const recipeObject = [
   },
 ];
 
+document.addEventListener("DOMContentLoaded", function () {
+  displayRecipe(recipeObject);
+});
 // Recipe Card start
 
-// Create title element
-const recipeContainer = document.getElementById("recipeCard");
-const title = document.createElement("h1");
-title.setAttribute("id", "recipeTitle");
-title.innerText = recipeObject[0].title;
-recipeContainer.appendChild(title);
+function displayRecipe(recipe) {
+  const recipeDisplay = document.getElementById("recipeContainer");
+  const recipeCard = document.createElement("div");
+  recipeCard.setAttribute("id", "recipeCard");
+  //recipeCard.innerHTML = "<h1>${recipeObject.title}</h1>";
+  recipeDisplay.appendChild(recipeCard);
 
-// create img element
-const image = document.createElement("img");
-image.src = recipeObject[0].picture_url;
-image.alt = recipeObject.title;
-image.width = 200;
-image.height = 200;
-recipeContainer.appendChild(image);
+  const titleELi = document.getElementById("recipeCard");
+  const title = document.createElement("h1");
+  title.setAttribute("id", "recipeTitle");
+  title.innerText = recipeObject[0].title;
+  recipeCard.appendChild(title);
 
-// create Description
+  const image = document.createElement("img");
+  image.src = recipeObject[0].picture_url;
+  image.alt = recipeObject.title;
+  image.width = 200;
+  image.height = 200;
+  recipeCard.appendChild(image);
 
-const recipeDiscription = document.createElement("div");
-recipeDiscription.classList = "card-details";
-recipeDiscription.id = "discriptin";
-recipeContainer.appendChild(recipeDiscription);
-const recipeText = document.createElement("h2");
-recipeText.innerText = recipeObject.description;
-recipeDiscription.appendChild(recipeText);
+  /// create ingredients list
 
-/// create ingredients list
+  // create container for ingredients list
+  const ingredientsList = document.createElement("div");
+  ingredientsList.classList = "ingridientlist";
+  recipeCard.appendChild(ingredientsList);
 
-// create container for ingredients list
-const ingredientsList = document.createElement("div");
-ingredientsList.classList = "ingridientlist";
-recipeContainer.appendChild(ingredientsList);
+  // create UL element for ingredients list
+  const ingredientsUL = document.createElement("ul");
+  ingredientsList.appendChild(ingredientsUL);
 
-// create UL element for ingredients list
-const ingredientsUL = document.createElement("ul");
-ingredientsList.appendChild(ingredientsUL);
+  // create Li for UL ingredients list using for Loop
 
-// create Li for UL ingredients list using for Loop
+  for (let i = 0; i < recipeObject[0].ingredients.length; i++) {
+    const LI = document.createElement("li");
+    LI.innerHTML = `${recipeObject[0].ingredients[i].NAME}: ${recipeObject[0].ingredients[i].AMOUNT}`;
+    LI.style.listStyleType = "none";
+    ingredientsUL.appendChild(LI);
+  }
 
-for (let i = 0; i < recipeObject[0].ingredients.length; i++) {
-  const LI = document.createElement("li");
-  LI.innerHTML = `${recipeObject[0].ingredients[i].NAME}: ${recipeObject[0].ingredients[i].AMOUNT}`;
-  ingredientsUL.appendChild(LI);
+  const recipeDiscription = document.createElement("div");
+  recipeDiscription.classList = "card-details";
+  recipeDiscription.id = "discriptin";
+  recipeCard.appendChild(recipeDiscription);
+  const recipeText = document.createElement("h2");
+  recipeText.innerText = recipeObject[0].description;
+  recipeDiscription.appendChild(recipeText);
 }
-
-// Recipe card end //
 
 // form start
 
