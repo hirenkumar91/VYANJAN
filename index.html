@@ -18,11 +18,19 @@
       <div id="recipeForm">
         <h1>-- Your recipe--</h1>
 
-        <form action="">
+        <form>
+          <input
+            type="number"
+            inputmode="numeric"
+            id="inNumeric"
+            name="id"
+            value="countClick()"
+            hidden
+          />
           <label for="recipeTitle">Recipe Name</label>
           <input type="text" id="recipeTitle" name="title" required />
           <label for="imageuplode">Picture</label>
-          <input type="file" id="imageuplode" name="uplode" />
+          <input type="file" id="imageUplode" name="upload" />
           <br /><br />
           <fieldset id="fieldset">
             <h1>Ingredients</h1>
