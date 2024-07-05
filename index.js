@@ -25,12 +25,12 @@ const recipeObject = [
 const recipeContainer = document.getElementById("recipeCard");
 const title = document.createElement("h1");
 title.setAttribute("id", "recipeTitle");
-title.innerText = recipeObject.title;
+title.innerText = recipeObject[0].title;
 recipeContainer.appendChild(title);
 
 // create img element
 const image = document.createElement("img");
-image.src = recipeObject.picture_url;
+image.src = recipeObject[0].picture_url;
 image.alt = recipeObject.title;
 image.width = 200;
 image.height = 200;
@@ -70,39 +70,37 @@ for (let i = 0; i < recipeObject[0].ingredients.length; i++) {
 // form start
 
 // start : button for adding ingredients
-const bTn = document
-  .getElementById("btnIngredients")
-  .addEventListener("click", function () {
-    const Fild = document.getElementById("ingredientFieldset");
-    const fieldDiv = document.createElement("div");
-    fieldDiv.setAttribute("id", "ingridiantList${clickCount()}");
-    Fild.appendChild(fieldDiv);
+function addIngredients() {
+  const field = document.getElementById("ingredientFieldset");
+  const fieldDiv = document.createElement("div");
+  fieldDiv.setAttribute("id", "ingredientContainer");
+  field.appendChild(fieldDiv);
 
-    const fieldSet = document.getElementById("ingridiantList");
+  // name field
+  const nameField = document.createElement("input");
+  nameField.setAttribute("id", "ingridiant");
+  nameField.setAttribute("placeholder", "Insert Ingridiant Name");
+  nameField.setAttribute("type", "text");
+  nameField.setAttribute("required", "");
+  nameField.style.margin = "10px";
+  fieldDiv.appendChild(nameField);
 
-    // name field
-    const NameFild = document.createElement("input");
-    NameFild.setAttribute("id", "ingridiant");
-    NameFild.setAttribute("placeholder", "Insert Ingridiant Name");
-    NameFild.setAttribute("type", "text");
-    NameFild.setAttribute("required", "");
-    fieldSet.appendChild(NameFild);
-
-    // ammount field
-    const inputAmmount = document.createElement("input");
-    inputAmmount.setAttribute("id", "ingrediantAmmount");
-    inputAmmount.setAttribute("placeholder", "Ammount");
-    inputAmmount.setAttribute("type", "text");
-    inputAmmount.setAttribute("required", "");
-    fieldSet.appendChild(inputAmmount);
-  });
+  // amount field
+  const inputAmount = document.createElement("input");
+  inputAmount.setAttribute("id", "ingredientAmount");
+  inputAmount.setAttribute("placeholder", "Amount");
+  inputAmount.setAttribute("type", "text");
+  inputAmount.setAttribute("required", "");
+  inputAmount.style.margin = "10px";
+  fieldDiv.appendChild(inputAmount);
+}
 // Start: function to enable & disable button on adding minimum 5 ingridiants.
 
 // Click counter
 let clickCount = 0;
 
 // Get the button elements
-const bTnclickCount = document.getElementById("btnIngredients");
+const btnClickCount = document.getElementById("btnIngredients");
 const submitButton = document.getElementById("submitbTn");
 const highlighter = document.getElementById("text-warning");
 
@@ -120,6 +118,6 @@ function countClick() {
   }
 }
 // Add event listener to the click button
-bTnclickCount.addEventListener("click", countClick);
+btnClickCount.addEventListener("click", countClick);
 
 //Form End
