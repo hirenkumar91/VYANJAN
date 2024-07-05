@@ -100,6 +100,11 @@ const bTn = document
 // Click counter
 let clickCount = 0;
 
+// Get the button elements
+const bTnclickCount = document.getElementById("bTnIngredients");
+const submitButton = document.getElementById("submitbTn");
+const highlighter = document.getElementById("text-worning");
+
 function countClick() {
   clickCount++;
   console.log(clickCount);
@@ -107,19 +112,16 @@ function countClick() {
   // Enable or disable the submit button based on click count
   if (clickCount < 5) {
     submitButton.setAttribute("disabled", ""); // Disable the button
-    const higlighter = document.getElementById("text-worning");
-    higlighter.style.color = "red";
+    highlighter.style.color = "red";
   } else {
     submitButton.removeAttribute("disabled"); // Enable the button
-    const higlighter = document.getElementById("text-worning");
-    higlighter.style.color = "green";
+    highlighter.style.color = "green";
   }
 }
 
-// Get the button elements
-const bTnclickCount = document.getElementById("bTnIngredients");
-const submitButton = document.getElementById("submitbTn");
-
+function onPageLoad() {
+  countClick();
+}
 // Add event listener to the click button
 bTnclickCount.addEventListener("click", countClick);
 
