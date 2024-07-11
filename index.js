@@ -25,52 +25,28 @@ document.addEventListener("DOMContentLoaded", function () {
 // Recipe Card start
 
 function displayRecipe(recipe) {
+  const recipeObject = recipe[0]; // Assuming 'recipe' is an array and we are using the first element
   const recipeDisplay = document.getElementById("recipeContainer");
-  const recipeCard = document.createElement("div");
-  recipeCard.setAttribute("id", "recipeCard");
-  //recipeCard.innerHTML = "<h1>${recipeObject.title}</h1>";
-  recipeDisplay.appendChild(recipeCard);
 
-  const titleELi = document.getElementById("recipeCard");
-  const title = document.createElement("h1");
-  title.setAttribute("id", "recipeTitle");
-  title.innerText = recipeObject[0].title;
-  recipeCard.appendChild(title);
+  const ingredientsListHTML = recipeObject.ingredients
+    .map(
+      (ingredient) =>
+        `<li style="list-style-type: none;">${ingredient.NAME}: ${ingredient.AMOUNT}</li>`
+    )
+    .join("");
 
-  const image = document.createElement("img");
-  image.src = recipeObject[0].picture_url;
-  image.alt = recipeObject.title;
-  image.width = 200;
-  image.height = 200;
-  recipeCard.appendChild(image);
-
-  /// create ingredients list
-
-  // create container for ingredients list
-  const ingredientsList = document.createElement("div");
-  ingredientsList.classList = "ingridientlist";
-  recipeCard.appendChild(ingredientsList);
-
-  // create UL element for ingredients list
-  const ingredientsUL = document.createElement("ul");
-  ingredientsList.appendChild(ingredientsUL);
-
-  // create Li for UL ingredients list using for Loop
-
-  for (let i = 0; i < recipeObject[0].ingredients.length; i++) {
-    const LI = document.createElement("li");
-    LI.innerHTML = `${recipeObject[0].ingredients[i].NAME}: ${recipeObject[0].ingredients[i].AMOUNT}`;
-    LI.style.listStyleType = "none";
-    ingredientsUL.appendChild(LI);
-  }
-
-  const recipeDiscription = document.createElement("div");
-  recipeDiscription.classList = "card-details";
-  recipeDiscription.id = "discriptin";
-  recipeCard.appendChild(recipeDiscription);
-  const recipeText = document.createElement("h2");
-  recipeText.innerText = recipeObject[0].description;
-  recipeDiscription.appendChild(recipeText);
+  recipeDisplay.innerHTML = `
+    <h1 id="recipeTitle">${recipeObject.title}</h1>
+    <div id="recipeCard" style="display: flex; flex-direction: column-reverse; font-size: 1.5rem;">
+      <img src="${recipeObject.picture_url}" alt="${recipeObject.title}">
+      <div class="ingridientlist">
+        <ul>${ingredientsListHTML}</ul>
+      </div>
+      <div class="card-details" id="discriptin">
+        <h2>${recipeObject.description}</h2>
+      </div>
+    </div>
+  `;
 }
 
 // form start
@@ -127,3 +103,21 @@ function countClick() {
 btnClickCount.addEventListener("click", countClick);
 
 //Form End
+
+// function to handle form Submission
+
+// Display message on form submission
+
+function submitForm(event) {
+  event.preventDefault();
+  document.getElementById("formSubmitMessage").style.display = "block";
+}
+
+// close button function
+
+function closeButton() {
+  var elements = document.getElementsByClassName("closeBtn");
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].style.display = "none";
+  }
+}
