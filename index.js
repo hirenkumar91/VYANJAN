@@ -49,18 +49,20 @@ function displayRecipe(recipe) {
   `;
 }
 
-// form start
+// function for adding ingredients.
+//functionality to enable & disable submit button.
 
-// start : button for adding ingredients
+let addCount = 0;
+
 function addIngredients() {
   const field = document.getElementById("ingredientFieldset");
   const fieldDiv = document.createElement("div");
-  fieldDiv.setAttribute("id", "ingredientContainer");
+  fieldDiv.setAttribute("class", "ingredientContainer");
   field.appendChild(fieldDiv);
 
   // name field
   const nameField = document.createElement("input");
-  nameField.setAttribute("id", "ingridiant");
+  nameField.setAttribute("class", "ingridiant");
   nameField.setAttribute("placeholder", "Insert Ingridiant Name");
   nameField.setAttribute("type", "text");
   nameField.setAttribute("required", "");
@@ -69,29 +71,20 @@ function addIngredients() {
 
   // amount field
   const inputAmount = document.createElement("input");
-  inputAmount.setAttribute("id", "ingredientAmount");
+  inputAmount.setAttribute("class", "ingredientAmount");
   inputAmount.setAttribute("placeholder", "Amount");
   inputAmount.setAttribute("type", "text");
   inputAmount.setAttribute("required", "");
   inputAmount.style.margin = "10px";
   fieldDiv.appendChild(inputAmount);
-}
-// Start: function to enable & disable button on adding minimum 5 ingridiants.
 
-// Click counter
-let clickCount = 0;
+  // add ingridiant count
 
-// Get the button elements
-const btnClickCount = document.getElementById("btnIngredients");
-const submitButton = document.getElementById("submitbTn");
-const highlighter = document.getElementById("text-warning");
+  addCount++;
+  const submitButton = document.getElementById("submitbTn");
+  const highlighter = document.getElementById("text-warning");
 
-function countClick() {
-  clickCount++;
-  console.log(clickCount);
-
-  // Enable or disable the submit button based on click count
-  if (clickCount < 5) {
+  if (addCount < 5) {
     submitButton.setAttribute("disabled", ""); // Disable the button
     highlighter.style.color = "red";
   } else {
@@ -99,14 +92,6 @@ function countClick() {
     highlighter.style.color = "green";
   }
 }
-// Add event listener to the click button
-btnClickCount.addEventListener("click", countClick);
-
-//Form End
-
-// function to handle form Submission
-
-// Display message on form submission
 
 function submitForm(event) {
   event.preventDefault();
