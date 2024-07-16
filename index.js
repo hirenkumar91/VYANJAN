@@ -41,6 +41,7 @@ function displayRecipe(recipe) {
   <h1 id="recipeTitle">${recipeObject.title}</h1>
   <div id="recipeCard" style="display: flex; flex-direction: column-reverse; font-size: 1.5rem;">
     <div class="ingridientlist">
+    <h3>ingridients</h3>
       <ul>${ingredientsListHTML}</ul>
     </div>
     <div class="card-details" id="discriptin">
