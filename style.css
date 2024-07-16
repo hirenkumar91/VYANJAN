@@ -9,31 +9,57 @@ body {
   background-color: #e4e4de;
   font-family: var(--main-text-font-family);
   color: var(--main-text-color);
+  margin: 0;
 }
 
 .Container {
   display: flex;
   flex-direction: column;
 }
-.sectionOne {
+
+
+.sectionOne{
   display: flex;
   flex-direction: column;
-  background-color: var(--main-text-color);
-  color: var(--main-bg-color);
   padding: 5rem;
+  background-color:white;
+  width: 100%;
+  height: auto;
+  margin: 0;
+}
+.card{
+  display: flex;
+  flex-direction:column;
+  background-color: #1b1b1b;
+  width: 20rem;
+  height: 30rem;
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  color: aliceblue;
 }
 
-#recipeCard > image {
-  margin: 5rem;
-  width: 10%;
-  height: auto;
+.card > img {
+
+  width: 100%;
+  height: 40%;
+  border-bottom: 0.5rem solid #e4e4de;
+}
+
+#recipeTitle {
+color: var(--main-focus-color);
+font-family:var(--main-text-font-family);
+font-weight: bold;
+font-size: 1.5rem;
+width: 100%;
+height: auto;
 }
 
 #formSubmitMessage {
   display: none;
   position: fixed;
   z-index: 5;
-  background-color: rgba(143, 199, 143, 0.5);
+  background-color: rgba(148, 153, 148, 0.5);
   width: 100rem;
   height: 60rem;
   align-content: center;

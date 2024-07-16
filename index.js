@@ -36,16 +36,20 @@ function displayRecipe(recipe) {
     .join("");
 
   recipeDisplay.innerHTML = `
-    <h1 id="recipeTitle">${recipeObject.title}</h1>
-    <div id="recipeCard" style="display: flex; flex-direction: column-reverse; font-size: 1.5rem;">
-      <img src="${recipeObject.picture_url}" alt="${recipeObject.title}">
-      <div class="ingridientlist">
-        <ul>${ingredientsListHTML}</ul>
-      </div>
-      <div class="card-details" id="discriptin">
-        <h2>${recipeObject.description}</h2>
-      </div>
+  <div class="card">
+    <img src="${recipeObject.picture_url}" alt="${recipeObject.title}">
+  <h1 id="recipeTitle">${recipeObject.title}</h1>
+  <div id="recipeCard" style="display: flex; flex-direction: column-reverse; font-size: 1.5rem;">
+    <div class="ingridientlist">
+      <ul>${ingredientsListHTML}</ul>
     </div>
+    <div class="card-details" id="discriptin">
+    <h3>Prepration</h3>
+      <p>${recipeObject.description}</p>
+    </div>
+  </div>
+  </div>
+
   `;
 }
 
