@@ -3,23 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="index.js"></script>
+    <title>Vyanjan</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <div class="Container" id="mainContainer">
-      <h1>Recipe App</h1>
-      <!-- car for display recipe-->
-      <div id="recipeCard">
-        <title>Name</title>
-        <div><img src="" alt="" /></div>
+      <div id="formSubmitMessage" class="closeBtn">
         <div>
-          <h1>ingridiants</h1>
-          <div>
-            <table></table>
-          </div>
+          <button type="button" onclick="closeButton()">x</button>
         </div>
+        <div><p>Thank You for your Input</p></div>
       </div>
+
+      <h1>
+        Vyanjan
+        <span><h6>Lets create world of testy Recipe</h6></span>
+      </h1>
+      <!-- start card for display recipe-->
+      <div id="recipeContainer" class="sectionOne row"></div>
+      <!--End of card-->
+
+      <!-- start Form for recipe-->
+
+      <div id="recipeForm" class="Container">
+        <h1>Post Your recipe</h1>
+
+        <form id="newRecipeform">
+          <label for="recipeTitle">Recipe Name</label>
+          <input type="text" id="recipeTitle" name="title" required />
+          <label for="imageUplode">Picture</label>
+          <input type="file" id="imageUplode" name="upload" />
+          <br /><br />
+          <fieldset id="ingredientFieldset">
+            <h1>Ingredients</h1>
+            <button
+              type="button"
+              id="btnIngredients"
+              onclick="addIngredients()"
+            >
+              Add Ingredients
+              <span id="text-warning">Minimum 5 Ingredients</span>
+            </button>
+          </fieldset>
+          <label for="discription">Description</label>
+          <textarea
+            name="text"
+            id="discription"
+            placeholder="Write Making process"
+            required
+          ></textarea>
+          <button
+            type="submit"
+            id="submitbTn"
+            onclick="submitForm(event)"
+            disabled
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+      <!--End of Form-->
     </div>
   </body>
+  <script src="index.js"></script>
 </html>
