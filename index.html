@@ -17,9 +17,10 @@
   </head>
   <body>
     <div class="Container" id="mainContainer">
+      <!-- Popup Messages -->
       <div id="formSubmitMessage" class="closeBtn">
         <div>
-          <button type="button" onclick="closeButton()">x</button>
+          <button  type="button" onclick="closeButton()">x</button>
         </div>
         <div><p>Thank You for your Input</p></div>
       </div>
@@ -28,18 +29,20 @@
         Vyanjan
         <span><h6>Lets create world of testy Recipe</h6></span>
       </h1>
+
       <!-- start card for display recipe-->
-      <div id="recipeContainer" class="sectionOne row"></div>
+      <div id="recipeContainer" class="sectionOne row">
+      </div>
       <!--End of card-->
 
       <!-- start Form for recipe-->
 
-      <div id="recipeForm" class="Container">
+      <div id="recipeForm" class="sectionTwo">
         <h1>Post Your recipe</h1>
 
         <form id="newRecipeform">
           <label for="recipeTitle">Recipe Name</label>
-          <input type="text" id="recipeTitle" name="title" required />
+          <input type="text" id="recipeName" name="title" required />
           <label for="imageUplode">Picture</label>
           <input type="file" id="imageUplode" name="upload" />
           <br /><br />
