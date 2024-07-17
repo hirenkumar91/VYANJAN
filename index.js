@@ -19,42 +19,6 @@ const recipeObject = [
   },
 ];
 
-document.addEventListener("DOMContentLoaded", function () {
-  displayRecipe(recipeObject);
-});
-
-// Recipe Card start
-
-function displayRecipe(recipe) {
-  const recipeObject = recipe[0]; // Assuming 'recipe' is an array and we are using the first element
-  const recipeDisplay = document.getElementById("recipeContainer");
-
-  const ingredientsListHTML = recipeObject.ingredients
-    .map(
-      (ingredient) =>
-        `<li style="list-style-type: none;">${ingredient.NAME}: ${ingredient.AMOUNT}</li>`
-    )
-    .join("");
-
-  recipeDisplay.innerHTML = `
-  <div class="card">
-    <img src="${recipeObject.picture_url}" alt="${recipeObject.title}">
-  <h1 id="recipeTitle">${recipeObject.title}</h1>
-  <div id="recipeCard" style="display: flex; flex-direction: column-reverse; font-size: 1.5rem;">
-    <div class="ingridientlist">
-    <h3>ingridients</h3>
-      <ul>${ingredientsListHTML}</ul>
-    </div>
-    <div class="card-details" id="discriptin">
-    <h3>Prepration</h3>
-      <p>${recipeObject.description}</p>
-    </div>
-  </div>
-  </div>
-
-  `;
-}
-
 // function for adding ingredients.
 //functionality to enable & disable submit button.
 
@@ -130,8 +94,17 @@ function submitForm(event) {
   };
 
   recipeObject.push(newRecipe);
+  document.getElementById("newRecipeform").reset();
+
+  // Clear the ingredients list
+  const ingredientContainers = document.querySelectorAll("#ingredientFieldset .ingredientContainer");
+  ingredientContainers.forEach(container => container.remove());
+
+  // Reset the submit button state
+  document.getElementById("submitbTn").setAttribute("disabled", ""); // Disable until 5 ingredients are added
+  document.getElementById("text-warning").textContent = "Minimum 5 Ingredients"; // Reset warning message
   document.getElementById("formSubmitMessage").style.display = "block";
-  console.log(recipeObject); // Display the updated recipeObject
+  displayRecipes(recipeObject);
 }
 
 
@@ -143,3 +116,42 @@ function closeButton() {
     elements[i].style.display = "none";
   }
 }
+
+function displayRecipes(recipes) {
+  const recipeDisplay = document.getElementById("recipeContainer");
+  
+  // Clear previous content
+  recipeDisplay.innerHTML = "";
+
+  // Iterate through each recipe
+  recipes.forEach(recipe => {
+    const ingredientsListHTML = recipe.ingredients
+      .map(ingredient => 
+        `<li style="list-style-type: none;">${ingredient.NAME}: ${ingredient.AMOUNT || 'N/A'}</li>`
+      )
+      .join("");
+
+    // Append each recipe's HTML
+    recipeDisplay.innerHTML += `
+      <div class="card">
+        <img src="${recipe.picture_url}" alt="${recipe.title}">
+        <h1>${recipe.title}</h1>
+        <div id="recipeCard" style="display: flex; flex-direction: column-reverse; font-size: 1.5rem;">
+          <div class="ingredientlist">
+            <h3>Ingredients</h3>
+            <ul>${ingredientsListHTML}</ul>
+          </div>
+          <div class="card-details" id="description">
+            <h3>Preparation</h3>
+            <p>${recipe.description}</p>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+}
+
+// Call the function to display all recipes on page load
+window.onload = function() {
+  displayRecipes(recipeObject);
+};

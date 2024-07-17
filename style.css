@@ -24,13 +24,14 @@ body {
 
 .sectionOne{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   padding: 5rem;
   background-color:white;
   height: auto;
   margin: 0;
 }
 .card{
+  margin: 2rem;
   display: flex;
   flex-direction:column;
   background-color: #1b1b1b;
