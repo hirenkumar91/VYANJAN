@@ -136,7 +136,7 @@ function displayRecipes(recipes) {
       <div class="card">
         <img src="${recipe.picture_url}" alt="${recipe.title}">
         <h1>${recipe.title}</h1>
-        <div id="recipeCard" style="display: flex; flex-direction: column-reverse; font-size: 1.5rem;">
+        <div id="recipeCard">
           <div class="ingredientlist">
             <h3>Ingredients</h3>
             <ul>${ingredientsListHTML}</ul>
