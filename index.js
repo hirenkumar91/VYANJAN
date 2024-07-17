@@ -22,6 +22,7 @@ const recipeObject = [
 document.addEventListener("DOMContentLoaded", function () {
   displayRecipe(recipeObject);
 });
+
 // Recipe Card start
 
 function displayRecipe(recipe) {
@@ -65,16 +66,16 @@ function addIngredients() {
   fieldDiv.setAttribute("class", "ingredientContainer");
   field.appendChild(fieldDiv);
 
-  // name field
+  // Name field
   const nameField = document.createElement("input");
-  nameField.setAttribute("class", "ingridiant");
-  nameField.setAttribute("placeholder", "Insert Ingridiant Name");
+  nameField.setAttribute("class", "ingredientName");
+  nameField.setAttribute("placeholder", "Insert Ingredient Name");
   nameField.setAttribute("type", "text");
   nameField.setAttribute("required", "");
   nameField.style.margin = "10px";
   fieldDiv.appendChild(nameField);
 
-  // amount field
+  // Amount field
   const inputAmount = document.createElement("input");
   inputAmount.setAttribute("class", "ingredientAmount");
   inputAmount.setAttribute("placeholder", "Amount");
@@ -83,8 +84,7 @@ function addIngredients() {
   inputAmount.style.margin = "10px";
   fieldDiv.appendChild(inputAmount);
 
-  // add ingridiant count
-
+  // Increment ingredient count
   addCount++;
   const submitButton = document.getElementById("submitbTn");
   const highlighter = document.getElementById("text-warning");
@@ -92,16 +92,48 @@ function addIngredients() {
   if (addCount < 5) {
     submitButton.setAttribute("disabled", ""); // Disable the button
     highlighter.style.color = "red";
+    highlighter.textContent = "Minimum 5 Ingredients";
   } else {
     submitButton.removeAttribute("disabled"); // Enable the button
     highlighter.style.color = "green";
+    highlighter.textContent = "You can now submit!";
   }
 }
 
+
 function submitForm(event) {
   event.preventDefault();
+  
+  const title = document.getElementById("recipeName").value;
+  console.log(title);
+  const description = document.getElementById("discription").value;
+
+  const ingredients = [];
+  const ingredientInputs = document.querySelectorAll("#ingredientFieldset .ingredientContainer");
+
+  ingredientInputs.forEach(container => {
+    const nameInput = container.querySelector(".ingredientName");
+    const amountInput = container.querySelector(".ingredientAmount");
+    
+    ingredients.push({
+      NAME: nameInput.value,
+      AMOUNT: amountInput.value,
+    });
+  });
+
+  const newRecipe = {
+    id: recipeObject.length + 1,
+    title,
+    picture_url: document.getElementById("imageUplode").files[0] ? URL.createObjectURL(document.getElementById("imageUplode").files[0]) : "",
+    ingredients,
+    description,
+  };
+
+  recipeObject.push(newRecipe);
   document.getElementById("formSubmitMessage").style.display = "block";
+  console.log(recipeObject); // Display the updated recipeObject
 }
+
 
 // close button function
 

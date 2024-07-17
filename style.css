@@ -6,15 +6,19 @@
 }
 body {
   display: block;
-  background-color: #e4e4de;
   font-family: var(--main-text-font-family);
   color: var(--main-text-color);
   margin: 0;
+  max-height: fit-content;
 }
 
 .Container {
   display: flex;
+  width: inherit;
   flex-direction: column;
+  margin: 0;
+  height: auto;
+  background-color: #e4e4de;
 }
 
 
@@ -23,7 +27,6 @@ body {
   flex-direction: column;
   padding: 5rem;
   background-color:white;
-  width: 100%;
   height: auto;
   margin: 0;
 }
@@ -32,7 +35,7 @@ body {
   flex-direction:column;
   background-color: #1b1b1b;
   width: 20rem;
-  transition: height 20s ease-in;
+  transition: height 0.9s ease-in;
   height:20rem;
   border-radius: 2rem;
   overflow: hidden;
@@ -41,8 +44,7 @@ body {
 }
 
 .card:hover{
-  height: 40rem;
-  padding: 1.5rem;
+  height:45rem;
 }
 
 .card > img {
@@ -55,10 +57,10 @@ body {
 color: var(--main-focus-color);
 font-family:var(--main-text-font-family);
 font-weight: bold;
-font-size: 1.5rem;
+font-size: 2rem;
 width: 100%;
 height: auto;
-margin-left: 8rem;
+margin-left: 6rem;
 text-transform: uppercase;
 }
 
@@ -89,17 +91,64 @@ text-transform: uppercase;
   display: none;
   position: fixed;
   z-index: 5;
-  background-color: rgba(148, 153, 148, 0.5);
-  width: 100rem;
-  height: 60rem;
+  background-color: rgba(148, 153, 148, 1);
+  width: 30rem;
+  height: 20rem;
   align-content: center;
   margin-left: 20rem;
   border-radius: 5rem;
-  font-size: 6rem;
+  font-size: 2rem;
   text-align: center;
   color: var(--main-text-color);
 }
 
-.closeBtn {
+.closeBtn >{
   display: block;
+}
+
+.sectionTwo{
+  background-color: #1b1b1b;
+  margin: 0;
+  padding: 1rem;
+  width: inherit;
+  display: flex;
+  flex-direction: row;
+}
+
+.sectionTwo > h1{
+  color: white;
+  padding: 1rem;
+  width: 40;
+
+}
+
+#newRecipeform{
+  width:100%;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 5rem;
+  margin-left: 5rem;
+ display: block;
+
+}
+#newRecipeform > label{
+  margin-bottom: 1rem;
+  font-weight: bolder;
+  width: fit-content;
+}
+#newRecipeform > input,fieldset,textarea{
+  width: inherit;
+  height: fit-content;
+  margin: 0 0 1rem 0;
+}
+
+#newRecipeform > button{
+
+  width: 5rem;
+  border-radius: 1rem;
+  background-color: var(--main-focus-color);
+ text-align: center;
+ text-decoration: solid;
+ color: black;
+ margin-top: 3rem;
 }
