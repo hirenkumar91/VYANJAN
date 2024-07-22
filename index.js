@@ -155,3 +155,4 @@ function displayRecipes(recipes) {
 window.onload = function() {
   displayRecipes(recipeObject);
 };
+
