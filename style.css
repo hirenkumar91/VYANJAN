@@ -8,9 +8,11 @@ body{
   margin: 0;
   padding: 0;
 }
+
 .Container {
   display: flex;
   flex-direction: row;
+  justify-content: left;
   width: 100vw;
   margin: 0;
   padding: 0;
@@ -24,11 +26,12 @@ body{
   padding: 2rem;
   position: fixed;
   height: 100%;
-  margin: 0;
-}
+  margin: 0;}
 
 .Container > div{
-  width: 88%;
-  padding: 2rem;
-  margin: 0%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 92%;
+  padding-left: 15rem;
 }
