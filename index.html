@@ -19,20 +19,15 @@
     <div class="Container" id="mainContainer">
 <!--Navigation Bar-->
       <nav id="navBar">
-      <div>
-        <a href="">Vyanjan</a>
-      </div>
-
-      <div>
-        <label for="searchBar">Search</label>
-        <input id="searchBar"type="text">
-      </div>
-
-      <ul>
-        <li><a href="#home">Home</a></li>
-          <li><a href="#recipeContainer">Recipe</a></li>
-          <li><a href="#addRecipe">Add Recipe</a></li>
-      </ul>
+        <div class="navbar"><div id="logo">
+          <a href="">Vyanjan</a>
+        </div>
+  
+        <ul class="navList">
+          <li><a href="#home">Home</a></li>
+            <li><a href="#recipeContainer">Recipe</a></li>
+            <li><a href="#addRecipe">Add Recipe</a></li>
+        </ul></div>
       </nav>
       <div id="content">
         <section id="home">
@@ -42,6 +37,12 @@
           </h1>
         </section>
         <section id="recipeContainer">
+          <nav>
+            <div>
+              <label for="searchBar">Search</label>
+              <input id="searchBar"type="text">
+            </div>
+           </nav>
           <!-- start card for display recipe-->
           <div class="sectionOne">
           </div>
