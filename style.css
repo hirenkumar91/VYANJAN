@@ -102,6 +102,9 @@ nav:hover .navbar > ul {
   padding-left: 15rem;
 }
 
+/** Content Styling **/
+
+
 .Container > #content {
   display: flex;
   justify-content: center;
