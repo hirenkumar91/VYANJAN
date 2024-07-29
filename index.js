@@ -136,17 +136,18 @@ function displayRecipes(recipes) {
       <div class="card">
         <img src="${recipe.picture_url}" alt="${recipe.title}">
         <h1>${recipe.title}</h1>
-        <div id="recipeCard">
-          <div class="ingredientlist">
-            <h3>Ingredients</h3>
-            <ul>${ingredientsListHTML}</ul>
-          </div>
-          <div class="card-details" id="description">
-            <h3>Preparation</h3>
-            <p>${recipe.description}</p>
-          </div>
+        <div class="popup-content">
+            <span class="close-button" id="closeBtn">&times;</span>
+            <div class="ingredientlist">
+                <h3>Ingredients</h3>
+                <ul>${ingredientsListHTML}</ul>
+            </div>
+            <div class="card-details" id="description">
+                <h3>Preparation</h3>
+                <p>${recipe.description}</p>
+            </div>
         </div>
-      </div>
+    </div>
     `;
   });
 }
@@ -156,3 +157,44 @@ window.onload = function() {
   displayRecipes(recipeObject);
 };
 
+
+
+
+const text1 = "Welcome to Vyanjan, your ultimate destination for a world of delightful recipes. Here, we gather and share a diverse collection of recipes from around the globe, bringing together flavors that inspire and satisfy.";
+const text2 = "Whether you are a culinary novice or a seasoned chef, Vyanjan is here to guide you through every step of your cooking journey. Our extensive recipe collection offers something for everyone, from traditional dishes that bring comfort to modern creations that ignite curiosity.";
+const text3 = "Join our community of food enthusiasts and embark on a culinary adventure. Explore new tastes, share your favorite recipes, and connect with others who share your passion for cooking. Welcome to Vyanjan, where every recipe tells a story and every meal is a celebration!";
+    const typingSpeed = 50;
+    let index1 = 0, index2 = 0, index3 = 0;
+
+    function typeWriter1() {
+      if (index1 < text1.length) {
+        document.getElementById("p1").innerHTML += text1.charAt(index1);
+        index1++;
+        setTimeout(typeWriter1, typingSpeed);
+      } else {
+        typeWriter2();
+      }
+    }
+
+    function typeWriter2() {
+      if (index2 < text2.length) {
+        document.getElementById("p2").innerHTML += text2.charAt(index2);
+        index2++;
+        setTimeout(typeWriter2, typingSpeed);
+      } else {
+        typeWriter3();
+      }
+    }
+
+    function typeWriter3() {
+      if (index3 < text3.length) {
+        document.getElementById("p3").innerHTML += text3.charAt(index3);
+        index3++;
+        setTimeout(typeWriter3, typingSpeed);
+      }
+    }
+
+    // Start typing effect on page load
+    window.onload = function() {
+      typeWriter1();
+    }
