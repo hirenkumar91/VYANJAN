@@ -218,9 +218,23 @@ const text3 = "Join our community of food enthusiasts and embark on a culinary a
 
     // Recipe Search function
 
-    function findRecipe(){
+    function findRecipe() {
       const searchKey = document.getElementById("searchkey").value.toLowerCase();
-      const filteredRecipes = recipeObject.filter(recipe =>recipe.title.toLowerCase().includes(searchKey))
-      const title = filteredRecipes.title
-      console.log(title)
+      if (searchKey.trim() === '') {
+          // If search input is empty, display all recipes
+          displayRecipes(recipeObject);
+          return;
+      }
+  
+      const filteredRecipes = recipeObject.filter(recipe =>
+          recipe.title.toLowerCase().includes(searchKey)
+      );
+  
+      // Display the filtered recipes
+      displayRecipes(filteredRecipes);
   }
+  
+  // Set up the initial load
+  window.onload = function() {
+      displayRecipes(recipeObject);
+  };
