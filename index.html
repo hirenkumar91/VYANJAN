@@ -17,65 +17,106 @@
   </head>
   <body>
     <div class="Container" id="mainContainer">
-      <!-- Popup Messages -->
-      <div id="formSubmitMessage" class="closeBtn">
-        <div>
-          <button  type="button" onclick="closeButton()">x</button>
+      
+<!--Navigation Bar-->
+      <nav id="navBar">
+        <div class="navbar">
+        <div id="logo">
+          <a href="">Vyanjan</a>
         </div>
-        <div><p>Thank You for your Input</p></div>
+  
+        <ul class="navList">
+          <li><a href="#home">Home</a></li>
+            <li><a href="#recipeSection">Recipe</a></li>
+            <li><a href="#addRecipe">Add Recipe</a></li>
+        </ul>
       </div>
+      <div id="timer"><a href="">00:00:00</a></div>
+      </nav>
+<!--End-->
 
-      <h1>
-        Vyanjan
-        <span><h6>Lets create world of testy Recipe</h6></span>
-      </h1>
+<!--Content section-->
+<!--Home-->
+      <div id="content">
+        <section id="home">
+          <h1>
+            Vyanjan
+            <span><h6>Lets create world of testy Recipe</h6></span>
+          </h1>
+          <div id="typing">
+            <p id="p1"></p>
+            <p id="p2"></p>
+            <p id="p3"></p>
+          </div>
+        </section>
+<!--Recipe Display-->
+        <section id="recipeSection">
+          <nav>
+            <div id="searchBar">
+              <button onclick="findRecipe()">Search</button>
+              <input id="searchkey" type="text" placeholder="Type Your Search">
+            </div>
+            <div id="sortbutton">
+              <button id="sortBtn" onclick="sortRecipes()">AtoZ</button>
+            </div>
+           </nav>
+          <!-- start card for display recipe-->
+          <div class="sectionOne" id="recipeContainer">
+            <div id="Nofind">
+              <span class="close-button" onclick="hidePopup()">&times;</span>
+              <div class="popup-message">
+              </div>
+            </div>
+          </div>
+          <!--End of card-->
+        </section>
+        <section id="addRecipe" >
+<!--recipe Form-->
+        
+<div id="recipeForm">
+  <h1>Post Your recipe</h1>
 
-      <!-- start card for display recipe-->
-      <div id="recipeContainer" class="sectionOne row">
+  <form id="newRecipeform">
+    <label for="recipeTitle">Recipe Name</label>
+    <input type="text" id="recipeName" name="title" required />
+    <label for="imageUplode">Picture</label>
+    <input type="file" id="imageUplode" name="upload" />
+    <br /><br />
+    <fieldset id="ingredientFieldset">
+      <h1>Ingredients</h1>
+      <button
+        type="button"
+        id="btnIngredients"
+        onclick="addIngredients()"
+      >
+        Add Ingredients
+        <span id="text-warning">Minimum 5 Ingredients</span>
+      </button>
+    </fieldset>
+    <label for="discription">Description</label>
+    <textarea
+      name="text"
+      id="discription"
+      placeholder="Write Making process"
+      required
+    ></textarea>
+    <button
+      type="submit"
+      id="submitbTn"
+      onclick="submitForm(event)"
+      disabled
+    >
+      Submit
+    </button>
+  </form>
+</div>
+<!--End of Form-->
+
+        </section>
+      </div>        
       </div>
-      <!--End of card-->
-
-      <!-- start Form for recipe-->
-
-      <div id="recipeForm" class="sectionTwo">
-        <h1>Post Your recipe</h1>
-
-        <form id="newRecipeform">
-          <label for="recipeTitle">Recipe Name</label>
-          <input type="text" id="recipeName" name="title" required />
-          <label for="imageUplode">Picture</label>
-          <input type="file" id="imageUplode" name="upload" />
-          <br /><br />
-          <fieldset id="ingredientFieldset">
-            <h1>Ingredients</h1>
-            <button
-              type="button"
-              id="btnIngredients"
-              onclick="addIngredients()"
-            >
-              Add Ingredients
-              <span id="text-warning">Minimum 5 Ingredients</span>
-            </button>
-          </fieldset>
-          <label for="discription">Description</label>
-          <textarea
-            name="text"
-            id="discription"
-            placeholder="Write Making process"
-            required
-          ></textarea>
-          <button
-            type="submit"
-            id="submitbTn"
-            onclick="submitForm(event)"
-            disabled
-          >
-            Submit
-          </button>
-        </form>
-      </div>
-      <!--End of Form-->
-    </div>
+      <!-- Popup Messages -->
+       
   </body>
   <script src="index.js"></script>
 </html>
