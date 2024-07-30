@@ -112,8 +112,7 @@ nav:hover .navbar > ul {
 
 /** Content Styling **/
 
-/** Home page **//
-
+/** Home page **/
 #content > #home{
   background-color: var(--main-text-color) !important;
 }

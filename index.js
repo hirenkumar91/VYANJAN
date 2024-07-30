@@ -105,6 +105,14 @@ let isAscending = true;
 
 const displayRecipes = (recipes) => {
   const recipeDisplay = document.getElementById("recipeContainer");
+
+  // If there are no recipes, display a message or empty container
+  if (recipes.length === 0) {
+    recipeDisplay.innerHTML = '<p>No recipes to display</p>';
+    return;
+  }
+
+  // Generate HTML for each recipe and join them
   recipeDisplay.innerHTML = recipes.map(recipe => `
     <div class="card">
       <img src="${recipe.picture_url}" alt="${recipe.title}">
@@ -125,18 +133,25 @@ const displayRecipes = (recipes) => {
 };
 
 const findRecipe = () => {
-  const searchKey = document.getElementById("searchkey").value.toLowerCase();
-  const filteredRecipes = searchKey.trim() === ''
+  const searchKey = document.getElementById("searchkey").value.toLowerCase().trim();
+  console.log("Search Key:", searchKey);
+
+  // Filter recipes based on search key
+  const filteredRecipes = searchKey === ''
     ? recipeObject
     : recipeObject.filter(recipe => recipe.title.toLowerCase().includes(searchKey));
+  
+  console.log("Filtered Recipes:", filteredRecipes);
 
+  // Display the filtered recipes
   displayRecipes(filteredRecipes);
 
+  // Show or hide the popup based on the number of filtered recipes
   if (filteredRecipes.length === 0) {
     showPopup('No recipes found');
-} else {
+  } else {
     hidePopup();
-}
+  }
 };
 
 function showPopup(message) {
@@ -192,10 +207,6 @@ const typeWriter = (elementId, text, index = 0, typingSpeed = 50, callback) => {
   }
 };
 
-window.onload = () => {
-  
-};
-
 
 // Timer Function
 
@@ -224,7 +235,8 @@ function stopTimer() {
 // Functions to be called on windows load
 window.onload = function() {
   // Timerfunction for time spent on page
-  displayRecipes(recipeObject);startTimer();
+  displayRecipes(recipeObject);
+  startTimer();
   // Typewriting effect
   typeWriter(
     "p1", 
@@ -248,5 +260,4 @@ window.onload = function() {
       );
     }
   );
-
 };
