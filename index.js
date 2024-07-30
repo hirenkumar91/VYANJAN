@@ -140,7 +140,35 @@ const findRecipe = () => {
     : recipeObject.filter(recipe => recipe.title.toLowerCase().includes(searchKey));
 
   displayRecipes(filteredRecipes);
+
+  if (filteredRecipes.length === 0) {
+    showPopup('No recipes found');
+} else {
+    hidePopup();
+}
 };
+
+function showPopup(message) {
+  const popup = document.getElementById('Nofind');
+  if (popup) {
+      const messageElement = popup.querySelector('.popup-message');
+      if (messageElement) {
+          messageElement.textContent = message;
+      } else {
+          console.error('Popup message element not found.');
+      }
+      popup.style.display = 'block';
+  } else {
+      console.error('Popup element not found.');
+  }
+}
+
+function hidePopup() {
+  const popup = document.getElementById('Nofind');
+  if (popup) {
+      popup.style.display = 'none';
+  }
+}
 
 window.onload = () => {
   typeWriter("p1", "Welcome to Vyanjan, your ultimate destination for a world of delightful recipes. Here, we gather and share a diverse collection of recipes from around the globe, bringing together flavors that inspire and satisfy.", 0, 50, () => {
@@ -169,3 +197,31 @@ function sortRecipes() {
   // Display the sorted recipes
   displayRecipes(sortedRecipes);
 }
+
+
+// Timer Function shows how much time spent on page let startTime;
+let timerInterval;
+
+function startTimer() {
+    startTime = new Date();
+    timerInterval = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+    const now = new Date();
+    const elapsedTime = new Date(now - startTime);
+
+    const hours = String(elapsedTime.getUTCHours()).padStart(2, '0');
+    const minutes = String(elapsedTime.getUTCMinutes()).padStart(2, '0');
+    const seconds = String(elapsedTime.getUTCSeconds()).padStart(2, '0');
+
+    document.getElementById('timer').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+window.onload = function() {
+    startTimer();
+};

@@ -17,6 +17,7 @@
   </head>
   <body>
     <div class="Container" id="mainContainer">
+      
 <!--Navigation Bar-->
       <nav id="navBar">
         <div class="navbar">
@@ -30,6 +31,7 @@
             <li><a href="#addRecipe">Add Recipe</a></li>
         </ul>
       </div>
+      <div id="timer"><a href="">00:00:00</a></div>
       </nav>
 <!--End-->
 
@@ -60,6 +62,10 @@
            </nav>
           <!-- start card for display recipe-->
           <div class="sectionOne" id="recipeContainer">
+            <div id="Nofind">
+              <span class="close-button" onclick="hidePopup()">&times;</span>
+              <div class="popup-message"></div>
+          </div>
           </div>
           <!--End of card-->
         </section>
