@@ -18,8 +18,8 @@ const recipeObject = [
   },
   {
     id: 2,
-    title: "ABC",
-    picture_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Gl%C3%B6gg_kastrull.JPG/800px-Gl%C3%B6gg_kastrull.JPG",
+    title: "noodles",
+    picture_url: "https://www.servingdumplings.com/wp-content/uploads/2024/01/coconut-guchujang-noodle-soup-tn-fdf0b3e8.jpg",
     ingredients: [
       { NAME: "Orange zest", AMOUNT: "0.5" },
       { NAME: "Water", AMOUNT: "200 ml" },
@@ -180,3 +180,73 @@ function sortRecipes() {
   // Display the sorted recipes
   displayRecipes(sortedRecipes);
 }
+
+//Typewriter effect 
+
+const typeWriter = (elementId, text, index = 0, typingSpeed = 50, callback) => {
+  if (index < text.length) {
+    document.getElementById(elementId).innerHTML += text.charAt(index);
+    setTimeout(() => typeWriter(elementId, text, index + 1, typingSpeed, callback), typingSpeed);
+  } else if (callback) {
+    callback();
+  }
+};
+
+window.onload = () => {
+  
+};
+
+
+// Timer Function
+
+let startTime;
+let timerInterval;
+
+function startTimer() {
+  startTime = new Date();
+  timerInterval = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+  const now = new Date();
+  const elapsedTime = new Date(now - startTime);
+
+  const hours = String(elapsedTime.getUTCHours()).padStart(2, '0');
+  const minutes = String(elapsedTime.getUTCMinutes()).padStart(2, '0');
+  const seconds = String(elapsedTime.getUTCSeconds()).padStart(2, '0');
+
+  document.getElementById('timer').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+// Functions to be called on windows load
+window.onload = function() {
+  // Timerfunction for time spent on page
+  startTimer();
+  // Typewriting effect
+  typeWriter(
+    "p1", 
+    "Welcome to Vyanjan, your ultimate destination for a world of delightful recipes. Here, we gather and share a diverse collection of recipes from around the globe, bringing together flavors that inspire and satisfy.", 
+    0, 
+    50, 
+    () => {
+      typeWriter(
+        "p2", 
+        "Whether you are a culinary novice or a seasoned chef, Vyanjan is here to guide you through every step of your cooking journey. Our extensive recipe collection offers something for everyone, from traditional dishes that bring comfort to modern creations that ignite curiosity.", 
+        0, 
+        50, 
+        () => {
+          typeWriter(
+            "p3", 
+            "Join our community of food enthusiasts and embark on a culinary adventure. Explore new tastes, share your favorite recipes, and connect with others who share your passion for cooking. Welcome to Vyanjan, where every recipe tells a story and every meal is a celebration!", 
+            0, 
+            50
+          );
+        }
+      );
+    }
+  );
+
+};
