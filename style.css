@@ -20,15 +20,20 @@ a {
 
 .Container {
   display: flex;
-  justify-content: left;
+  flex-direction: row;
   width: 100vw;
   background-color: var(--main-bg-color);
 }
+#content > section{
+  padding-left: 8rem;
+  height: 100vh;
+}
+/**Navigation Bar**/
 
 .Container > nav {
   display: flex;
   flex-direction: column;
-  width: 2%;
+  width: 2vw;
   padding: 2rem;
   transition: width 0.5s ease;
   background-color: var(--main-bgNav-color);
@@ -98,26 +103,19 @@ nav:hover .navbar > ul {
  color: #1b1b1b;
 }
 
-.Container > div {
+.Container > #content {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 92%;
-  padding-left:5rem;
+  width: 100vw;
 }
 
 /** Content Styling **/
 
-section {
-  height: 100vh;
-  width: 100%;
-}
+/** Home page **//
 
-#home{
-  background-color: #3e4444;
-  color: var(--main-bgNav-color);
-  padding:0 0 0 8vw;
-  display: block;
+#content > #home{
+  background-color: var(--main-text-color) !important;
 }
 
 #home > h1{
@@ -140,19 +138,21 @@ section {
   50% { border-color: black; }
 }
 
+
+/** recipe Display section **/
+
 #recipeSection{
   display: flex;
   flex-direction: column;
-  width: 98%;
-  padding-left: 8rem;
   background-color: #e6ffe6;
 }
 
 #recipeSection > nav {
-  border-bottom: 1px solid #ccc;
-  width: fit-content;
-  border-radius: 1rem;
+  border-bottom: 1px solid black;
   margin-top: 2rem;
+  padding-bottom: 2rem;
+  display:flex;
+  flex-direction: row;
 }
 
 #recipeContainer{
@@ -161,10 +161,9 @@ section {
   flex-direction: row;
 }
 
-#recipeContainer > *{
-  padding: 2rem;
-}
 .card {
+  margin: 2rem;
+  padding: 2rem;
   width: 300px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -179,6 +178,7 @@ section {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 1rem;
 }
 
 .card h1 {
@@ -201,24 +201,4 @@ section {
   list-style-type: disc;
   margin: 0;
   padding-left: 20px;
-}
-.popup-content {
-  border:2px solid var(--main-focus-color);
-  opacity: 1;
-  height: 0rem;
-  transition: height 1s ease-in, transform 1s ease-in;
-}
-.card:hover > .popup-content {
-  opacity: 1;
-  height: 20rem;
-  border: 2px solid var(--main-focus-color);
-}
-
-#recipeSection > nav{
-  display:flex;
-  flex-direction: row;
-}
-
-#recipeSection > nav > * {
-  padding-left: 4rem;
 }
