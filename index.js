@@ -124,15 +124,6 @@ const displayRecipes = (recipes) => {
   `).join('');
 };
 
-const typeWriter = (elementId, text, index = 0, typingSpeed = 50, callback) => {
-  if (index < text.length) {
-    document.getElementById(elementId).innerHTML += text.charAt(index);
-    setTimeout(() => typeWriter(elementId, text, index + 1, typingSpeed, callback), typingSpeed);
-  } else if (callback) {
-    callback();
-  }
-};
-
 const findRecipe = () => {
   const searchKey = document.getElementById("searchkey").value.toLowerCase();
   const filteredRecipes = searchKey.trim() === ''
@@ -158,6 +149,7 @@ function showPopup(message) {
           console.error('Popup message element not found.');
       }
       popup.style.display = 'block';
+      popup.style.backgroundColor = 'black';
   } else {
       console.error('Popup element not found.');
   }
@@ -168,15 +160,6 @@ function hidePopup() {
   if (popup) {
       popup.style.display = 'none';
   }
-}
-
-window.onload = () => {
-  typeWriter("p1", "Welcome to Vyanjan, your ultimate destination for a world of delightful recipes. Here, we gather and share a diverse collection of recipes from around the globe, bringing together flavors that inspire and satisfy.", 0, 50, () => {
-    typeWriter("p2", "Whether you are a culinary novice or a seasoned chef, Vyanjan is here to guide you through every step of your cooking journey. Our extensive recipe collection offers something for everyone, from traditional dishes that bring comfort to modern creations that ignite curiosity.", 0, 50, () => {
-      typeWriter("p3", "Join our community of food enthusiasts and embark on a culinary adventure. Explore new tastes, share your favorite recipes, and connect with others who share your passion for cooking. Welcome to Vyanjan, where every recipe tells a story and every meal is a celebration!", 0, 50);
-    });
-  });
-
   displayRecipes(recipeObject);
 };
 
@@ -188,7 +171,7 @@ function sortRecipes() {
       return 0;
   });
 
-  // Toggle sorting order
+
   isAscending = !isAscending;
 
   // Update button text
@@ -224,4 +207,40 @@ function stopTimer() {
 
 window.onload = function() {
     startTimer();
+};
+
+
+
+const typeWriter = (elementId, text, index = 0, typingSpeed = 50, callback) => {
+  if (index < text.length) {
+    document.getElementById(elementId).innerHTML += text.charAt(index);
+    setTimeout(() => typeWriter(elementId, text, index + 1, typingSpeed, callback), typingSpeed);
+  } else if (callback) {
+    callback();
+  }
+};
+
+window.onload = () => {
+  typeWriter(
+    "p1", 
+    "Welcome to Vyanjan, your ultimate destination for a world of delightful recipes. Here, we gather and share a diverse collection of recipes from around the globe, bringing together flavors that inspire and satisfy.", 
+    0, 
+    50, 
+    () => {
+      typeWriter(
+        "p2", 
+        "Whether you are a culinary novice or a seasoned chef, Vyanjan is here to guide you through every step of your cooking journey. Our extensive recipe collection offers something for everyone, from traditional dishes that bring comfort to modern creations that ignite curiosity.", 
+        0, 
+        50, 
+        () => {
+          typeWriter(
+            "p3", 
+            "Join our community of food enthusiasts and embark on a culinary adventure. Explore new tastes, share your favorite recipes, and connect with others who share your passion for cooking. Welcome to Vyanjan, where every recipe tells a story and every meal is a celebration!", 
+            0, 
+            50
+          );
+        }
+      );
+    }
+  );
 };

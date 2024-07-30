@@ -52,11 +52,11 @@
 <!--Recipe Display-->
         <section id="recipeSection">
           <nav>
-            <div>
-              <button onclick="findRecipe()"></button>
+            <div id="searchBar">
+              <button onclick="findRecipe()">Search</button>
               <input id="searchkey" type="text" placeholder="Type Your Search">
             </div>
-            <div>
+            <div id="sortbutton">
               <button id="sortBtn" onclick="sortRecipes()">AtoZ</button>
             </div>
            </nav>
@@ -64,8 +64,9 @@
           <div class="sectionOne" id="recipeContainer">
             <div id="Nofind">
               <span class="close-button" onclick="hidePopup()">&times;</span>
-              <div class="popup-message"></div>
-          </div>
+              <div class="popup-message">
+              </div>
+            </div>
           </div>
           <!--End of card-->
         </section>
