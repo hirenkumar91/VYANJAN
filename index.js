@@ -224,7 +224,7 @@ function stopTimer() {
 // Functions to be called on windows load
 window.onload = function() {
   // Timerfunction for time spent on page
-  startTimer();
+  displayRecipes(recipeObject);startTimer();
   // Typewriting effect
   typeWriter(
     "p1", 
