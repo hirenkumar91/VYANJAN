@@ -11,7 +11,9 @@ body {
   padding: 0;
   color:var(--main-text-color);
 }
-
+h1{
+  color:var(--main-logo-color);
+}
 a {
   text-decoration: none;
   text-transform: uppercase;
@@ -33,7 +35,7 @@ a {
 .Container > nav {
   display: flex;
   flex-direction: column;
-  width: 2vw;
+  width: fit-content;
   padding: 2rem;
   transition: width 0.5s ease;
   background-color: var(--main-bgNav-color);
@@ -41,11 +43,20 @@ a {
   height: 100%;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
 }
+
 #timer{
-  padding-top:  10rem;
-  width:fit-content;
-  color: #447024;
-  font: bold 4rem;
+  display: block;
+  padding: 1rem;
+  background-color: #3e4444;
+  margin-left: 0;
+  width: fit-content;
+  color: var(--main-bgNav-color);
+  font-size: 1rem;
+  z-index: 2;
+  border-radius: 2rem;
+  position: fixed;
+  border: 3px solid var(--main-bgNav-color);
+  margin-top: 0;
 }
 
 .navbar {
@@ -108,6 +119,22 @@ nav:hover .navbar > ul {
   justify-content: center;
   flex-direction: column;
   width: 100vw;
+  padding-left: 5rem;
+}
+
+#timer{
+  display: block;
+  padding: 1rem;
+  background-color: #3e4444;
+  margin-left: 0;
+  width: fit-content;
+  color: var(--main-bgNav-color);
+  font-size: 1rem;
+  z-index: 2;
+  border-radius: 2rem;
+  position: fixed;
+  border: 3px solid var(--main-bgNav-color);
+  margin-top: 0;
 }
 
 /** Content Styling **/
@@ -124,13 +151,16 @@ nav:hover .navbar > ul {
   margin-top: 1rem;
   line-height: 1.6;
   font-size: 1.5rem;
+  color: var(--main-bgNav-color) !important;
+  
 }
 
 #typing {
   white-space: pre-wrap;
   border-right: 2px solid;
   animation: blink-caret 0.7s step-end infinite;
-  width: 70%;
+  width: inherit;
+  padding-right: 2rem;
 }
 @keyframes blink-caret {
   from, to { border-color: transparent; }
@@ -221,3 +251,100 @@ nav:hover .navbar > ul {
   right: 10px;
   cursor: pointer;
 }
+
+#addRecipe {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--background-color);
+}
+
+#recipeForm {
+  background: #fff;
+  border: 3px solid var(--main-text-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+#recipeForm h1 {
+  color: var(--main-text-color);
+  text-align: center;
+}
+
+label {
+  display: block;
+  margin: 10px 0 5px;
+  color: var(--main-text-color);
+}
+
+input[type="text"],
+input[type="file"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid var(--main-text-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+#btnIngredients {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+  padding: 10px 15px;
+  border: 1px solid var(--main-text-color);
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+#btnIngredients > .ingredientContainer{
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+}
+
+#text-warning {
+  font-size: 12px;
+  color: var(--accent-color);
+  display: block;
+  margin-top: 5px;
+}
+
+#submitbTn {
+  width: 100%;
+  background-color: var(--main-bgNav-color);
+  color: var(--button-text-color);
+  padding: 10px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#submitbTn:disabled {
+  background-color: #bdc3c7;
+  cursor: not-allowed;
+}
+
+#submitbTn:hover:enabled {
+  background-color: darken(var(--main-bgNav-color), 10%);
+}
+
+#formSubmitMessage {overflow-wrap: normal;
+  font-size: 2rem;  width:fit-content;
+  height: fit-content;
+  display: none;
+  color: var(--main-logo-color);
+  padding: 2rem;}

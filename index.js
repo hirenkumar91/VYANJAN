@@ -46,7 +46,7 @@ const addIngredients = () => {
   ["Name", "Amount"].forEach(type => {
     const input = document.createElement("input");
     input.className = `ingredient${type}`;
-    input.placeholder = `Insert Ingredient ${type}`;
+    input.placeholder = `Insert ${type}`;
     input.type = "text";
     input.required = true;
     input.style.margin = "10px";
@@ -69,20 +69,74 @@ const addIngredients = () => {
 };
 
 const submitForm = (event) => {
-  event.preventDefault();
 
-  const title = document.getElementById("recipeName").value;
-  const description = document.getElementById("discription").value;
-  const ingredients = Array.from(document.querySelectorAll("#ingredientFieldset .ingredientContainer"))
-    .map(container => ({
-      NAME: container.querySelector(".ingredientName").value,
-      AMOUNT: container.querySelector(".ingredientAmount").value
-    }));
+  event.preventDefault();  // Prevent form submission
+  
+  const respondMessage = document.getElementById("formSubmitMessage");
+  respondMessage.style.display = "none"; // Hide the message initially
+
+  const title = document.getElementById("recipeName").value.trim();
+  const description = document.getElementById("discription").value.trim();
+  const imageFile = document.getElementById("imageUplode").files[0];
+
+  let validForm = true;
+
+  // Validate title
+  if (!title) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please fill up the recipe title.";
+    return;
+  }
+
+  // Validate image
+  if (!imageFile) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please upload an image.";
+    return;
+  }
+
+  // Validate description
+  if (!description) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please fill up the description.";
+    return;
+  }
+
+  // Validate ingredients
+  const ingredientContainers = Array.from(document.querySelectorAll("#ingredientFieldset .ingredientContainer"));
+  let validIngredients = true;
+  ingredientContainers.forEach(container => {
+    const nameInput = container.querySelector(".ingredientName");
+    const amountInput = container.querySelector(".ingredientAmount");
+    if (!nameInput.value.trim() || !amountInput.value.trim()) {
+      validIngredients = false;
+    }
+  });
+
+  if (!validIngredients) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please fill up ingredient details.";
+    return;
+  }
+
+  if (!validForm) {
+    return;
+  }
+
+  // Proceed to collect ingredient data since validation passed
+  const ingredients = ingredientContainers.map(container => ({
+    NAME: container.querySelector(".ingredientName").value,
+    AMOUNT: container.querySelector(".ingredientAmount").value
+  }));
 
   const newRecipe = {
     id: recipeObject.length + 1,
     title,
-    picture_url: document.getElementById("imageUplode").files[0] ? URL.createObjectURL(document.getElementById("imageUplode").files[0]) : "",
+    picture_url: URL.createObjectURL(imageFile),
     ingredients,
     description
   };
@@ -93,7 +147,8 @@ const submitForm = (event) => {
   addCount = 0;
   document.getElementById("submitbTn").disabled = true;
   document.getElementById("text-warning").textContent = "Minimum 5 Ingredients";
-  document.getElementById("formSubmitMessage").style.display = "block";
+  respondMessage.style.display = "block";
+  respondMessage.innerText= "Thank You for filling up form";
   displayRecipes(recipeObject);
 };
 
