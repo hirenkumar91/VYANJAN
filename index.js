@@ -161,12 +161,6 @@ let isAscending = true;
 const displayRecipes = (recipes) => {
   const recipeDisplay = document.getElementById("recipeContainer");
 
-  // If there are no recipes, display a message or empty container
-  if (recipes.length === 0) {
-    recipeDisplay.innerHTML = '<p>No recipes to display</p>';
-    return;
-  }
-
   // Generate HTML for each recipe and join them
   recipeDisplay.innerHTML = recipes.map(recipe => `
     <div class="card">

@@ -175,15 +175,30 @@ nav:hover .navbar > ul {
   flex-direction: column;
   background-color: #e6ffe6;
 }
-
-#recipeSection > nav {
-  border-bottom: 1px solid black;
-  margin-top: 2rem;
-  padding-bottom: 2rem;
-  display:flex;
-  flex-direction: row;
+#recipeSection > nav{
+  border-radius: 5px;
+  border-bottom:2px solid #1b1b1b;
+}
+#recipeSection > nav , nav > *{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  padding: 20px;
 }
 
+#searchBar {
+  display: flex;
+  align-items: center;
+}
+
+#searchBar button {
+  margin-right: 10px;
+}
+
+#sortbutton {
+  display: flex;
+  align-items: center;
+}
 #recipeContainer{
   padding-top: 2rem;
   display: flex;
