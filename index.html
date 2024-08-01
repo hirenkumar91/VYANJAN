@@ -59,11 +59,19 @@
             <div id="sortbutton">
               <button id="sortBtn" onclick="sortRecipes()">AtoZ</button>
             </div>
+           <div class="linebr"></div>
+            <div id="stopWatch">
+              <h1>Cooking Timer</h1>
+              <input id="cookingTime" type="number" placeholder="Insert Your Time in minuits" value= "0" required>
+              <button onclick="startCookingTimer()">start</button>
+              <div id="timerCountdown">00:00:00</div>
+            </div>
+            <audio id="alarmSound" src="https://www.soundbible.com/mp3/Buzzer-SoundBible.com-188422102.mp3" preload="auto"></audio>
            </nav>
            <div id="Nofind">
             <span class="close-button" onclick="hidePopup()">&times;</span>
             <div class="popup-message">
-            </div>
+          </div>
           </div>
           <!-- start card for display recipe-->
           <div class="sectionOne" id="recipeContainer">

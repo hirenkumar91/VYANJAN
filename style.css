@@ -19,6 +19,11 @@ a {
   text-transform: uppercase;
   color: var(--main-text-color);
 }
+button{
+  background-color: var(--main-text-color);
+  color: var(--main-bgNav-color);
+  border-radius: 1rem;
+}
 
 .Container {
   display: flex;
@@ -42,21 +47,6 @@ a {
   position: fixed;
   height: 100%;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
-}
-
-#timer{
-  display: block;
-  padding: 1rem;
-  background-color: #3e4444;
-  margin-left: 0;
-  width: fit-content;
-  color: var(--main-bgNav-color);
-  font-size: 1rem;
-  z-index: 2;
-  border-radius: 2rem;
-  position: fixed;
-  border: 3px solid var(--main-bgNav-color);
-  margin-top: 0;
 }
 
 .navbar {
@@ -363,3 +353,31 @@ textarea {
   display: none;
   color: var(--main-logo-color);
   padding: 2rem;}
+
+  .linebr{
+    border: 2px solid var(--main-text-color);
+    height: 6vh;
+    padding: 0;
+  }
+
+  #stopWatch{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+  }
+
+  #stopWatch > *{
+    margin: 1rem;
+    max-width: fit-content;
+  }
+
+  #timerCountdown{
+    padding: 1rem;
+    font-size: 2rem bold;
+    background-color: var(--main-text-color);
+    color: var(--main-focus-color);
+    border-radius: 2rem;
+    width: 10rem;
+    display: none;
+  }

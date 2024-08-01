@@ -157,9 +157,35 @@ const closeButton = () => {
 };
 
 let isAscending = true;
+const findRecipe = () => {
+  const searchKey = document.getElementById("searchkey").value.toLowerCase().trim();
+  console.log("Search Key:", searchKey);
 
+  // Filter recipes based on search key
+  const filteredRecipes = searchKey === ''
+    ? recipeObject
+    : recipeObject.filter(recipe => recipe.title.toLowerCase().includes(searchKey));
+  
+  console.log("Filtered Recipes:", filteredRecipes);
+
+  // Display the filtered recipes
+  displayRecipes(filteredRecipes);
+
+  console.log("this");
+
+  // Show or hide the popup based on the number of filtered recipes
+  if (filteredRecipes.length === 0) {
+    showPopup('No recipes found');
+  } else {
+    hidePopup();
+  }
+};
 const displayRecipes = (recipes) => {
+  console.log("Displaying Recipes:", recipes);
   const recipeDisplay = document.getElementById("recipeContainer");
+
+  // Clear previous content
+  recipeDisplay.innerHTML = '';
 
   // Generate HTML for each recipe and join them
   recipeDisplay.innerHTML = recipes.map(recipe => `
@@ -181,27 +207,6 @@ const displayRecipes = (recipes) => {
   `).join('');
 };
 
-const findRecipe = () => {
-  const searchKey = document.getElementById("searchkey").value.toLowerCase().trim();
-  console.log("Search Key:", searchKey);
-
-  // Filter recipes based on search key
-  const filteredRecipes = searchKey === ''
-    ? recipeObject
-    : recipeObject.filter(recipe => recipe.title.toLowerCase().includes(searchKey));
-  
-  console.log("Filtered Recipes:", filteredRecipes);
-
-  // Display the filtered recipes
-  displayRecipes(filteredRecipes);
-
-  // Show or hide the popup based on the number of filtered recipes
-  if (filteredRecipes.length === 0) {
-    showPopup('No recipes found');
-  } else {
-    hidePopup();
-  }
-};
 
 function showPopup(message) {
   const popup = document.getElementById('Nofind');
@@ -310,3 +315,76 @@ window.onload = function() {
     }
   );
 };
+
+// Stopwatch
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize the countdown display to 00:00:00 on page load
+  updateCountdownDisplay(0, document.getElementById('timerCountdown'));
+});
+
+function startCookingTimer() {
+  let timeInMinutes = parseInt(document.getElementById('cookingTime').value, 10);
+
+  document.getElementById("timerCountdown").style.display="block"
+  // Handle invalid input
+  if (isNaN(timeInMinutes) || timeInMinutes < 0) {
+      alert("Enter a valid number");
+
+      // Reset the input field and countdown display
+      document.getElementById('cookingTime').value = 0;
+      updateCountdownDisplay(0, document.getElementById('timerCountdown'));
+      return;
+  }
+
+  // Convert minutes to seconds
+  const timeInSeconds = timeInMinutes * 60;
+
+  // Start the timer
+  startStopwatch(timeInSeconds);
+}
+
+function startStopwatch(duration) {
+  const alarmSound = document.getElementById('alarmSound');
+  const countdownElement = document.getElementById('timerCountdown');
+  let timeRemaining = duration;
+
+  // Ensure timeRemaining is a number
+  if (isNaN(timeRemaining) || timeRemaining < 0) {
+      timeRemaining = 0;
+  }
+
+  // Update the countdown display immediately
+  updateCountdownDisplay(timeRemaining, countdownElement);
+
+  // Update the countdown every second
+  const countdownInterval = setInterval(() => {
+      timeRemaining--;
+      if (timeRemaining < 0) {
+          clearInterval(countdownInterval);
+          alert('Time is up!');
+          alarmSound.play();
+      } else {
+          updateCountdownDisplay(timeRemaining, countdownElement);
+      }
+  }, 1000);
+}
+
+function updateCountdownDisplay(seconds, element) {
+  // Ensure seconds is a number
+  if (isNaN(seconds)) {
+      seconds = 0;
+  }
+
+  const counthours = Math.floor(seconds / 3600);
+  const countminutes = Math.floor((seconds % 3600) / 60);
+  const countremainingSeconds = seconds % 60;
+
+  const formattedTime = [
+      counthours.toString().padStart(2, '0'),
+      countminutes.toString().padStart(2, '0'),
+      countremainingSeconds.toString().padStart(2, '0')
+  ].join(':');
+
+  // Update the display element
+  element.textContent = formattedTime;
+}
