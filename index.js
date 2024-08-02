@@ -1,41 +1,16 @@
-const recipeObject = [
-  {
-    id: 1,
-    title: "Gløgg",
-    picture_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Gl%C3%B6gg_kastrull.JPG/800px-Gl%C3%B6gg_kastrull.JPG",
-    ingredients: [
-      { NAME: "Orange zest", AMOUNT: "0.5" },
-      { NAME: "Water", AMOUNT: "200 ml" },
-      { NAME: "Sugar", AMOUNT: "275 g" },
-      { NAME: "Whole cloves", AMOUNT: "5" },
-      { NAME: "Cinnamon sticks", AMOUNT: "2" },
-      { NAME: "Spice", AMOUNT: "" },
-      { NAME: "Bottle of red wine", AMOUNT: "1" },
-      { NAME: "Raisins", AMOUNT: "100 g" },
-      { NAME: "Slipped Almonds", AMOUNT: "50 g" },
-    ],
-    description: "Mix everything, heat it, and you are good to go!",
-  },
-  {
-    id: 2,
-    title: "noodles",
-    picture_url: "https://www.servingdumplings.com/wp-content/uploads/2024/01/coconut-guchujang-noodle-soup-tn-fdf0b3e8.jpg",
-    ingredients: [
-      { NAME: "Orange zest", AMOUNT: "0.5" },
-      { NAME: "Water", AMOUNT: "200 ml" },
-      { NAME: "Sugar", AMOUNT: "275 g" },
-      { NAME: "Whole cloves", AMOUNT: "5" },
-      { NAME: "Cinnamon sticks", AMOUNT: "2" },
-      { NAME: "Spice", AMOUNT: "" },
-      { NAME: "Bottle of red wine", AMOUNT: "1" },
-      { NAME: "Raisins", AMOUNT: "100 g" },
-      { NAME: "Slipped Almonds", AMOUNT: "50 g" },
-    ],
-    description: "Mix everything, heat it, and you are good to go!",
-  },
-];
-
+const recipeData = 'https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/data.json'
+let recipeObject = [];
 let addCount = 0;
+
+async function fetchRecipes() {
+    try {
+        const response = await fetch(recipeData);
+        recipeObject = await response.json();
+        displayRecipes(recipeObject);
+    } catch (error) {
+        console.error('Error fetching recipes:', error);
+    }
+}
 
 const addIngredients = () => {
   const field = document.getElementById("ingredientFieldset");
@@ -291,6 +266,7 @@ window.onload = function() {
   // Timerfunction for time spent on page
   displayRecipes(recipeObject);
   startTimer();
+  fetchRecipes();
   // Typewriting effect
   typeWriter(
     "p1", 
