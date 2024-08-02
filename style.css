@@ -189,14 +189,18 @@ nav:hover .navbar > ul {
   display: flex;
   align-items: center;
 }
+
 #recipeContainer{
   padding-top: 2rem;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  overflow: scroll;
+  gap: 20px;
+  align-items: center;
 }
 
 .card {
-  margin: 2rem;
   padding: 2rem;
   width: 300px;
   border: 1px solid #ccc;

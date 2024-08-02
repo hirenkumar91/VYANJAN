@@ -1,17 +1,33 @@
-const recipeData = 'https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/data.json'
+const dataUrl = 'https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/data.json';
+
+
 let recipeObject = [];
 let addCount = 0;
 
 async function fetchRecipes() {
-    try {
-        const response = await fetch(recipeData);
-        recipeObject = await response.json();
-        displayRecipes(recipeObject);
-    } catch (error) {
-        console.error('Error fetching recipes:', error);
-    }
+  try {
+      const response = await fetch(dataUrl);
+      
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const text = await response.text();
+      
+      // Log and check response text
+      
+      // Attempt to parse JSON
+      try {
+          recipeObject = JSON.parse(text);
+      } catch (jsonError) {
+          throw new Error('Failed to parse JSON: ' + jsonError.message);
+      }
+      
+      displayRecipes(recipeObject);
+  } catch (error) {
+      console.error('Error fetching recipes:', error);
+  }
 }
-
 const addIngredients = () => {
   const field = document.getElementById("ingredientFieldset");
   const fieldDiv = document.createElement("div");
@@ -146,8 +162,6 @@ const findRecipe = () => {
   // Display the filtered recipes
   displayRecipes(filteredRecipes);
 
-  console.log("this");
-
   // Show or hide the popup based on the number of filtered recipes
   if (filteredRecipes.length === 0) {
     showPopup('No recipes found');
@@ -156,7 +170,6 @@ const findRecipe = () => {
   }
 };
 const displayRecipes = (recipes) => {
-  console.log("Displaying Recipes:", recipes);
   const recipeDisplay = document.getElementById("recipeContainer");
 
   // Clear previous content
@@ -298,6 +311,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateCountdownDisplay(0, document.getElementById('timerCountdown'));
 });
 
+document.getElementById('startTimer').addEventListener('click',startCookingTimer);
 function startCookingTimer() {
   let timeInMinutes = parseInt(document.getElementById('cookingTime').value, 10);
 
