@@ -1,42 +1,33 @@
-const recipeObject = [
-  {
-    id: 1,
-    title: "Gløgg",
-    picture_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Gl%C3%B6gg_kastrull.JPG/800px-Gl%C3%B6gg_kastrull.JPG",
-    ingredients: [
-      { NAME: "Orange zest", AMOUNT: "0.5" },
-      { NAME: "Water", AMOUNT: "200 ml" },
-      { NAME: "Sugar", AMOUNT: "275 g" },
-      { NAME: "Whole cloves", AMOUNT: "5" },
-      { NAME: "Cinnamon sticks", AMOUNT: "2" },
-      { NAME: "Spice", AMOUNT: "" },
-      { NAME: "Bottle of red wine", AMOUNT: "1" },
-      { NAME: "Raisins", AMOUNT: "100 g" },
-      { NAME: "Slipped Almonds", AMOUNT: "50 g" },
-    ],
-    description: "Mix everything, heat it, and you are good to go!",
-  },
-  {
-    id: 2,
-    title: "ABC",
-    picture_url: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e2/Gl%C3%B6gg_kastrull.JPG/800px-Gl%C3%B6gg_kastrull.JPG",
-    ingredients: [
-      { NAME: "Orange zest", AMOUNT: "0.5" },
-      { NAME: "Water", AMOUNT: "200 ml" },
-      { NAME: "Sugar", AMOUNT: "275 g" },
-      { NAME: "Whole cloves", AMOUNT: "5" },
-      { NAME: "Cinnamon sticks", AMOUNT: "2" },
-      { NAME: "Spice", AMOUNT: "" },
-      { NAME: "Bottle of red wine", AMOUNT: "1" },
-      { NAME: "Raisins", AMOUNT: "100 g" },
-      { NAME: "Slipped Almonds", AMOUNT: "50 g" },
-    ],
-    description: "Mix everything, heat it, and you are good to go!",
-  },
-];
+const dataUrl = 'https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/data.json';
 
+
+let recipeObject = [];
 let addCount = 0;
 
+async function fetchRecipes() {
+  try {
+      const response = await fetch(dataUrl);
+      
+      if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+      
+      const text = await response.text();
+      
+      // Log and check response text
+      
+      // Attempt to parse JSON
+      try {
+          recipeObject = JSON.parse(text);
+      } catch (jsonError) {
+          throw new Error('Failed to parse JSON: ' + jsonError.message);
+      }
+      
+      displayRecipes(recipeObject);
+  } catch (error) {
+      console.error('Error fetching recipes:', error);
+  }
+}
 const addIngredients = () => {
   const field = document.getElementById("ingredientFieldset");
   const fieldDiv = document.createElement("div");
@@ -46,7 +37,7 @@ const addIngredients = () => {
   ["Name", "Amount"].forEach(type => {
     const input = document.createElement("input");
     input.className = `ingredient${type}`;
-    input.placeholder = `Insert Ingredient ${type}`;
+    input.placeholder = `Insert ${type}`;
     input.type = "text";
     input.required = true;
     input.style.margin = "10px";
@@ -69,20 +60,74 @@ const addIngredients = () => {
 };
 
 const submitForm = (event) => {
-  event.preventDefault();
 
-  const title = document.getElementById("recipeName").value;
-  const description = document.getElementById("discription").value;
-  const ingredients = Array.from(document.querySelectorAll("#ingredientFieldset .ingredientContainer"))
-    .map(container => ({
-      NAME: container.querySelector(".ingredientName").value,
-      AMOUNT: container.querySelector(".ingredientAmount").value
-    }));
+  event.preventDefault();  // Prevent form submission
+  
+  const respondMessage = document.getElementById("formSubmitMessage");
+  respondMessage.style.display = "none"; // Hide the message initially
+
+  const title = document.getElementById("recipeName").value.trim();
+  const description = document.getElementById("discription").value.trim();
+  const imageFile = document.getElementById("imageUplode").files[0];
+
+  let validForm = true;
+
+  // Validate title
+  if (!title) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please fill up the recipe title.";
+    return;
+  }
+
+  // Validate image
+  if (!imageFile) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please upload an image.";
+    return;
+  }
+
+  // Validate description
+  if (!description) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please fill up the description.";
+    return;
+  }
+
+  // Validate ingredients
+  const ingredientContainers = Array.from(document.querySelectorAll("#ingredientFieldset .ingredientContainer"));
+  let validIngredients = true;
+  ingredientContainers.forEach(container => {
+    const nameInput = container.querySelector(".ingredientName");
+    const amountInput = container.querySelector(".ingredientAmount");
+    if (!nameInput.value.trim() || !amountInput.value.trim()) {
+      validIngredients = false;
+    }
+  });
+
+  if (!validIngredients) {
+    validForm = false;
+    respondMessage.style.display = "block";
+    respondMessage.innerText = "Please fill up ingredient details.";
+    return;
+  }
+
+  if (!validForm) {
+    return;
+  }
+
+  // Proceed to collect ingredient data since validation passed
+  const ingredients = ingredientContainers.map(container => ({
+    NAME: container.querySelector(".ingredientName").value,
+    AMOUNT: container.querySelector(".ingredientAmount").value
+  }));
 
   const newRecipe = {
     id: recipeObject.length + 1,
     title,
-    picture_url: document.getElementById("imageUplode").files[0] ? URL.createObjectURL(document.getElementById("imageUplode").files[0]) : "",
+    picture_url: URL.createObjectURL(imageFile),
     ingredients,
     description
   };
@@ -93,7 +138,8 @@ const submitForm = (event) => {
   addCount = 0;
   document.getElementById("submitbTn").disabled = true;
   document.getElementById("text-warning").textContent = "Minimum 5 Ingredients";
-  document.getElementById("formSubmitMessage").style.display = "block";
+  respondMessage.style.display = "block";
+  respondMessage.innerText= "Thank You for filling up form";
   displayRecipes(recipeObject);
 };
 
@@ -102,9 +148,34 @@ const closeButton = () => {
 };
 
 let isAscending = true;
+const findRecipe = () => {
+  const searchKey = document.getElementById("searchkey").value.toLowerCase().trim();
+  console.log("Search Key:", searchKey);
 
+  // Filter recipes based on search key
+  const filteredRecipes = searchKey === ''
+    ? recipeObject
+    : recipeObject.filter(recipe => recipe.title.toLowerCase().includes(searchKey));
+  
+  console.log("Filtered Recipes:", filteredRecipes);
+
+  // Display the filtered recipes
+  displayRecipes(filteredRecipes);
+
+  // Show or hide the popup based on the number of filtered recipes
+  if (filteredRecipes.length === 0) {
+    showPopup('No recipes found');
+  } else {
+    hidePopup();
+  }
+};
 const displayRecipes = (recipes) => {
   const recipeDisplay = document.getElementById("recipeContainer");
+
+  // Clear previous content
+  recipeDisplay.innerHTML = '';
+
+  // Generate HTML for each recipe and join them
   recipeDisplay.innerHTML = recipes.map(recipe => `
     <div class="card">
       <img src="${recipe.picture_url}" alt="${recipe.title}">
@@ -124,20 +195,6 @@ const displayRecipes = (recipes) => {
   `).join('');
 };
 
-const findRecipe = () => {
-  const searchKey = document.getElementById("searchkey").value.toLowerCase();
-  const filteredRecipes = searchKey.trim() === ''
-    ? recipeObject
-    : recipeObject.filter(recipe => recipe.title.toLowerCase().includes(searchKey));
-
-  displayRecipes(filteredRecipes);
-
-  if (filteredRecipes.length === 0) {
-    showPopup('No recipes found');
-} else {
-    hidePopup();
-}
-};
 
 function showPopup(message) {
   const popup = document.getElementById('Nofind');
@@ -179,4 +236,145 @@ function sortRecipes() {
 
   // Display the sorted recipes
   displayRecipes(sortedRecipes);
+}
+
+//Typewriter effect 
+
+const typeWriter = (elementId, text, index = 0, typingSpeed = 50, callback) => {
+  if (index < text.length) {
+    document.getElementById(elementId).innerHTML += text.charAt(index);
+    setTimeout(() => typeWriter(elementId, text, index + 1, typingSpeed, callback), typingSpeed);
+  } else if (callback) {
+    callback();
+  }
+};
+
+
+// Timer Function
+
+let startTime;
+let timerInterval;
+
+function startTimer() {
+  startTime = new Date();
+  timerInterval = setInterval(updateTimer, 1000);
+}
+
+function updateTimer() {
+  const now = new Date();
+  const elapsedTime = new Date(now - startTime);
+
+  const hours = String(elapsedTime.getUTCHours()).padStart(2, '0');
+  const minutes = String(elapsedTime.getUTCMinutes()).padStart(2, '0');
+  const seconds = String(elapsedTime.getUTCSeconds()).padStart(2, '0');
+
+  document.getElementById('timer').textContent = `${hours}:${minutes}:${seconds}`;
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+}
+// Functions to be called on windows load
+window.onload = function() {
+  // Timerfunction for time spent on page
+  displayRecipes(recipeObject);
+  startTimer();
+  fetchRecipes();
+  // Typewriting effect
+  typeWriter(
+    "p1", 
+    "Welcome to Vyanjan, your ultimate destination for a world of delightful recipes. Here, we gather and share a diverse collection of recipes from around the globe, bringing together flavors that inspire and satisfy.", 
+    0, 
+    50, 
+    () => {
+      typeWriter(
+        "p2", 
+        "Whether you are a culinary novice or a seasoned chef, Vyanjan is here to guide you through every step of your cooking journey. Our extensive recipe collection offers something for everyone, from traditional dishes that bring comfort to modern creations that ignite curiosity.", 
+        0, 
+        50, 
+        () => {
+          typeWriter(
+            "p3", 
+            "Join our community of food enthusiasts and embark on a culinary adventure. Explore new tastes, share your favorite recipes, and connect with others who share your passion for cooking. Welcome to Vyanjan, where every recipe tells a story and every meal is a celebration!", 
+            0, 
+            50
+          );
+        }
+      );
+    }
+  );
+};
+
+// Stopwatch
+document.addEventListener('DOMContentLoaded', () => {
+  // Initialize the countdown display to 00:00:00 on page load
+  updateCountdownDisplay(0, document.getElementById('timerCountdown'));
+});
+
+document.getElementById('startTimer').addEventListener('click',startCookingTimer);
+function startCookingTimer() {
+  let timeInMinutes = parseInt(document.getElementById('cookingTime').value, 10);
+
+  document.getElementById("timerCountdown").style.display="block"
+  // Handle invalid input
+  if (isNaN(timeInMinutes) || timeInMinutes < 0) {
+      alert("Enter a valid number");
+
+      // Reset the input field and countdown display
+      document.getElementById('cookingTime').value = 0;
+      updateCountdownDisplay(0, document.getElementById('timerCountdown'));
+      return;
+  }
+
+  // Convert minutes to seconds
+  const timeInSeconds = timeInMinutes * 60;
+
+  // Start the timer
+  startStopwatch(timeInSeconds);
+}
+
+function startStopwatch(duration) {
+  const alarmSound = document.getElementById('alarmSound');
+  const countdownElement = document.getElementById('timerCountdown');
+  let timeRemaining = duration;
+
+  // Ensure timeRemaining is a number
+  if (isNaN(timeRemaining) || timeRemaining < 0) {
+      timeRemaining = 0;
+  }
+
+  // Update the countdown display immediately
+  updateCountdownDisplay(timeRemaining, countdownElement);
+
+  // Update the countdown every second
+  const countdownInterval = setInterval(() => {
+      timeRemaining--;
+      if (timeRemaining < 0) {
+          clearInterval(countdownInterval);
+          alert('Time is up!');
+          alarmSound.play();
+      } else {
+          updateCountdownDisplay(timeRemaining, countdownElement);
+      }
+  }, 1000);
+}
+
+function updateCountdownDisplay(seconds, element) {
+  // Ensure seconds is a number
+  if (isNaN(seconds)) {
+      seconds = 0;
+  }
+
+  const counthours = Math.floor(seconds / 3600);
+  const countminutes = Math.floor((seconds % 3600) / 60);
+  const countremainingSeconds = seconds % 60;
+
+  const formattedTime = [
+      counthours.toString().padStart(2, '0'),
+      countminutes.toString().padStart(2, '0'),
+      countremainingSeconds.toString().padStart(2, '0')
+  ].join(':');
+
+  // Update the display element
+  element.textContent = formattedTime;
 }
