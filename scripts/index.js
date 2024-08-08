@@ -1,3 +1,27 @@
+//Apply Style based on screen Size.
+function loadDeviceStyle(href){
+  let link= document.createElement('link');
+  link.rel ="stylesheet";
+  link.href = href;
+  document.head.appendChild(link);
+}
+
+function applyDeciceStyle (){
+  if (window.innerWidth <= 768) {
+    loadDeviceStyle('./Style/mobile.css');
+} else if (window.innerWidth <= 1024) {
+  loadDeviceStyle('./Style/tablet.css');
+} else {
+  loadDeviceStyle('./Style/desktop.css');
+}
+}
+
+window.addEventListener("resize",applyDeciceStyle);
+window.addEventListener("load",applyDeciceStyle);
+
+
+
+
 const dataUrl = 'https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/data.json';
 let recipeObject = [];
 let addCount = 0;
