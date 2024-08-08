@@ -181,10 +181,6 @@ nav:hover .navbar > ul {
   align-items: center;
 }
 
-#searchBar button {
-  margin-right: 10px;
-}
-
 #sortbutton {
   display: flex;
   align-items: center;
