@@ -10,7 +10,7 @@ function applyDeciceStyle (){
   if (window.innerWidth <= 768) {
     loadDeviceStyle('./Style/mobile.css');
 } else if (window.innerWidth <= 1024) {
-  loadDeviceStyle('./Style/tablet.css');
+  loadDeviceStyle('./Style/teblet.css');
 } else {
   loadDeviceStyle('./Style/desktop.css');
 }
@@ -19,11 +19,14 @@ function applyDeciceStyle (){
 window.addEventListener("resize",applyDeciceStyle);
 window.addEventListener("load",applyDeciceStyle);
 
-
+//
 
 
 const dataUrl = 'https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/data.json';
+const priceDataurl ='https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/priceData.json';
 let recipeObject = [];
+let ingredienTPrice =[];
+
 let addCount = 0;
 
 async function fetchRecipes() {
@@ -42,6 +45,30 @@ async function fetchRecipes() {
     console.error('Error fetching recipes:', error);
   }
 }
+
+
+async function fetchIngridiants() {
+  try {
+    const response = await fetch(priceDataurl);
+    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+    
+    const text = await response.text();
+    try {
+      ingredienTPrice = JSON.parse(text);
+
+    } catch (jsonError) {
+      throw new Error('Failed to parse JSON: ' + jsonError.message);
+    }
+  } catch (error) {
+    console.error('Error fetching recipes:', error);
+  }
+
+  console.log(ingredienTPrice);
+}
+
+
+
+
 
 function addIngredients() {
   const field = document.getElementById("ingredientFieldset");
@@ -201,7 +228,7 @@ function hidePopup() {
   displayRecipes(recipeObject);
 }
 
-function sortRecipes() {
+function sortRecipesbyTitel() {
   const sortBtn = document.getElementById('sortBtn');
   const sortedRecipes = [...recipeObject].sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()) * (isAscending ? 1 : -1));
   isAscending = !isAscending;
@@ -244,6 +271,7 @@ window.onload = function() {
       typeWriter("p3", "Join our community of food enthusiasts and embark on a culinary adventure. Explore new tastes, share your favorite recipes, and connect with others who share your passion for cooking. Welcome to Vyanjan, where every recipe tells a story and every meal is a celebration!", 0, 50);
     });
   });
+  fetchIngridiants();
 };
 
 document.addEventListener('DOMContentLoaded', () => updateCountdownDisplay(0, document.getElementById('timerCountdown')));
