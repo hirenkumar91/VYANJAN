@@ -236,6 +236,8 @@ function sortRecipesbyTitel() {
   displayRecipes(sortedRecipes);
 }
 
+document.getElementById("sortBtn").addEventListener('click',sortRecipesbyTitel);
+
 function typeWriter(elementId, text, index = 0, typingSpeed = 50, callback) {
   if (index < text.length) {
     document.getElementById(elementId).innerHTML += text.charAt(index);
