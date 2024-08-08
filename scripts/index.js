@@ -73,7 +73,7 @@ function submitForm(event) {
   resetForm();
   respondMessage.style.display = "block";
   respondMessage.innerText = "Thank You for filling up form";
-  displayRecipes(recipeObject);
+  //displayRecipes(recipeObject);
 }
 
 function validateForm(title, description, imageFile, respondMessage) {
@@ -128,13 +128,6 @@ function closeButton() {
 }
 
 let isAscending = true;
-function findRecipe() {
-  const searchKey = document.getElementById("searchkey").value.toLowerCase().trim();
-  const filteredRecipes = searchKey ? recipeObject.filter(recipe => recipe.title.toLowerCase().includes(searchKey)) : recipeObject;
-  displayRecipes(filteredRecipes);
-  if (filteredRecipes.length === 0) showPopup('No recipes found');
-  else hidePopup();
-}
 
 function displayRecipes(recipes) {
   const recipeDisplay = document.getElementById("recipeContainer");
@@ -156,6 +149,15 @@ function displayRecipes(recipes) {
     </div>
   `).join('');
 }
+function findRecipe() {
+  const searchKey = document.getElementById("searchkey").value.toLowerCase().trim();
+  const filteredRecipes = searchKey ? recipeObject.filter(recipe => recipe.title.toLowerCase().startsWith(searchKey)) : recipeObject;
+  
+  if (filteredRecipes.length === 0) showPopup('No recipes found');
+  else hidePopup(),displayRecipes(filteredRecipes);
+}
+
+document.getElementById("searchkey").addEventListener("keyup",findRecipe);
 
 function showPopup(message) {
   const popup = document.getElementById('Nofind');
@@ -211,7 +213,6 @@ function stopTimer() {
 }
 
 window.onload = function() {
-  displayRecipes(recipeObject);
   startTimer();
   fetchRecipes();
   typeWriter("p1", "Welcome to Vyanjan, your ultimate destination for a world of delightful recipes. Here, we gather and share a diverse collection of recipes from around the globe, bringing together flavors that inspire and satisfy.", 0, 50, () => {
