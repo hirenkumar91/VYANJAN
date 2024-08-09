@@ -181,15 +181,23 @@ nav:hover .navbar > ul {
   align-items: center;
 }
 
-#searchBar button {
-  margin-right: 10px;
-}
-
 #sortbutton {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-around;
 }
 
+#sortbutton > button{
+  margin: 0.5rem;
+}
+
+#priceSearch{
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 1rem;
+}
 #recipeContainer{
   padding-top: 2rem;
   display: flex;
