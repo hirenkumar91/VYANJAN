@@ -66,6 +66,37 @@ async function fetchIngridiants() {
   console.log(ingredienTPrice);
 }
 
+function findPrice(){
+  let ingrediantserch = document.getElementById("ingredientInput").value.toLowerCase();
+
+  if (ingrediantserch.trim() === '') {
+    document.getElementById("result").textContent = 'Please enter an ingredient name.';
+    return;
+  }
+
+  let matchIngrediant = ingredienTPrice.find(item => 
+    item.ingredient.toLowerCase() === ingrediantserch
+  );
+
+  if(matchIngrediant && matchIngrediant.price !== null){
+    document.getElementById("result").textContent = `Price For ${matchIngrediant.ingredient} is ${matchIngrediant.price} DKK per KG`;
+  }
+  else if(matchIngrediant && matchIngrediant.price == null){
+    document.getElementById("result").textContent = `Price For ${matchIngrediant.ingredient} is not available`;
+  } else{
+    document.getElementById("result").textContent = `Ingredient ${ingrediantserch} not found`;
+  }
+
+  console.log(ingrediantserch);
+  console.log(matchIngrediant);
+};
+
+document.getElementById("pricesearchBtn").addEventListener("click",findPrice);
+
+
+
+
+
 
 
 

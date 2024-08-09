@@ -192,6 +192,12 @@ nav:hover .navbar > ul {
   margin: 0.5rem;
 }
 
+#priceSearch{
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 1rem;
+}
 #recipeContainer{
   padding-top: 2rem;
   display: flex;
