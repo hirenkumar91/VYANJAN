@@ -178,7 +178,6 @@ function closeButton() {
   document.querySelectorAll(".closeBtn").forEach(element => element.style.display = "none");
 }
 
-let isAscending = true;
 
 function displayRecipes(recipes) {
   const recipeDisplay = document.getElementById("recipeContainer");
@@ -227,16 +226,32 @@ function hidePopup() {
   if (popup) popup.style.display = 'none';
   displayRecipes(recipeObject);
 }
+let isTitleAscending = true;
+let isIngredientsAscending = true;
 
 function sortRecipesbyTitel() {
   const sortBtn = document.getElementById('sortBtn');
-  const sortedRecipes = [...recipeObject].sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()) * (isAscending ? 1 : -1));
-  isAscending = !isAscending;
-  sortBtn.textContent = isAscending ? 'Z to A' : 'A to Z';
+  const sortedRecipes = [...recipeObject].sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()) * (isTitleAscending ? 1 : -1));
+  isTitleAscending = !isTitleAscending;
+  sortBtn.textContent = isTitleAscending ? 'Z to A' : 'A to Z';
   displayRecipes(sortedRecipes);
 }
 
+function sortRecipesByIngredients() {
+  const sortBtnIngredients = document.getElementById('sortBtnIngredients');
+  // Assuming each recipe object has an `ingredients` array
+  const sortedRecipesbyIngredients = [...recipeObject].sort((a, b) => {
+    return (b.ingredients.length - a.ingredients.length) * (isIngredientsAscending ? 1 : -1);
+  });
+  
+  isIngredientsAscending = !isIngredientsAscending;
+  sortBtnIngredients.textContent = isIngredientsAscending ? 'Less Ingredients' : 'More Ingredients';
+  displayRecipes(sortedRecipesbyIngredients);
+}
+
+
 document.getElementById("sortBtn").addEventListener('click',sortRecipesbyTitel);
+document.getElementById("sortBtnIngredients").addEventListener('click',sortRecipesByIngredients);
 
 function typeWriter(elementId, text, index = 0, typingSpeed = 50, callback) {
   if (index < text.length) {

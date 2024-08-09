@@ -183,7 +183,13 @@ nav:hover .navbar > ul {
 
 #sortbutton {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-around;
+}
+
+#sortbutton > button{
+  margin: 0.5rem;
 }
 
 #recipeContainer{
