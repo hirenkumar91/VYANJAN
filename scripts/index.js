@@ -1,31 +1,8 @@
-//Apply Style based on screen Size.
-function loadDeviceStyle(href){
-  let link= document.createElement('link');
-  link.rel ="stylesheet";
-  link.href = href;
-  document.head.appendChild(link);
-}
-
-function applyDeciceStyle (){
-  if (window.innerWidth <= 768) {
-    loadDeviceStyle('./Style/mobile.css');
-} else if (window.innerWidth <= 1024) {
-  loadDeviceStyle('./Style/teblet.css');
-} else {
-  loadDeviceStyle('./Style/desktop.css');
-}
-}
-
-window.addEventListener("resize",applyDeciceStyle);
-window.addEventListener("load",applyDeciceStyle);
-
-//
-
 
 const dataUrl = 'https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/data.json';
-const priceDataurl ='https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/priceData.json';
+const priceDataUrl ='https://raw.githubusercontent.com/hirenkumar91/mYapi/main/recipiAppdata/priceData.json';
 let recipeObject = [];
-let ingredienTPrice =[];
+let ingredientPrice =[];
 
 let addCount = 0;
 
@@ -47,35 +24,28 @@ async function fetchRecipes() {
 }
 
 
-async function fetchIngridiants() {
+async function fetchIngridients() {
   try {
-    const response = await fetch(priceDataurl);
+    const response = await fetch(priceDataUrl);
     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
     
-    const text = await response.text();
-    try {
-      ingredienTPrice = JSON.parse(text);
-
-    } catch (jsonError) {
-      throw new Error('Failed to parse JSON: ' + jsonError.message);
-    }
+    ingredientPrice = await response.json();
   } catch (error) {
     console.error('Error fetching recipes:', error);
+    document.getElementById("result").textContent = 'Failed to load ingredient prices.';
   }
-
-  console.log(ingredienTPrice);
 }
 
 function findPrice(){
-  let ingrediantserch = document.getElementById("ingredientInput").value.toLowerCase();
+  let ingredientSearch = document.getElementById("ingredientInput").value.toLowerCase();
 
-  if (ingrediantserch.trim() === '') {
+  if (ingredientSearch.trim() === '') {
     document.getElementById("result").textContent = 'Please enter an ingredient name.';
     return;
   }
 
-  let matchIngrediant = ingredienTPrice.find(item => 
-    item.ingredient.toLowerCase() === ingrediantserch
+  let matchIngrediant = ingredientPrice.find(item => 
+    item.ingredient.toLowerCase() === ingredientSearch
   );
 
   if(matchIngrediant && matchIngrediant.price !== null){
@@ -84,11 +54,8 @@ function findPrice(){
   else if(matchIngrediant && matchIngrediant.price == null){
     document.getElementById("result").textContent = `Price For ${matchIngrediant.ingredient} is not available`;
   } else{
-    document.getElementById("result").textContent = `Ingredient ${ingrediantserch} not found`;
+    document.getElementById("result").textContent = `Ingredient ${ingredientSearch} not found`;
   }
-
-  console.log(ingrediantserch);
-  console.log(matchIngrediant);
 };
 
 document.getElementById("pricesearchBtn").addEventListener("click",findPrice);
@@ -319,7 +286,7 @@ window.onload = function() {
       typeWriter("p3", "Join our community of food enthusiasts and embark on a culinary adventure. Explore new tastes, share your favorite recipes, and connect with others who share your passion for cooking. Welcome to Vyanjan, where every recipe tells a story and every meal is a celebration!", 0, 50);
     });
   });
-  fetchIngridiants();
+  fetchIngridients();
 };
 
 document.addEventListener('DOMContentLoaded', () => updateCountdownDisplay(0, document.getElementById('timerCountdown')));
