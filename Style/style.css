@@ -14,17 +14,84 @@ body {
 h1{
   color:var(--main-logo-color);
 }
+
 a {
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--main-text-color);
+  color: var(--main-bgNav-color);
 }
+
 button{
   background-color: var(--main-text-color);
   color: var(--main-bgNav-color);
   border-radius: 1rem;
 }
 
+#mainContainer{
+  display: flex;
+  flex-direction: column;
+  width:100%;
+  overflow: hidden;
+}
+#navBar{
+  display: flex;
+  flex-direction:row;
+  align-items: center;
+  width: 100%;
+  background-color: #447024;
+}
+
+.navbar{
+  display: flex;
+  flex-direction:column;
+  width: 100%;
+  align-items: center;
+  margin: 0;
+  padding-top:1rem ;
+}
+#timer{
+  display: block;
+  position: fixed;
+  left: 310px;
+  right: 0;
+top: 620px;
+bottom: 20px;
+padding: 5px;
+display: block;
+background-color: #3e4444;
+width: fit-content;
+color: var(--main-bgNav-color);
+font-size: 1rem;
+border-radius: 2rem 0 0 2rem;
+position: fixed;
+margin-top: 0;
+}
+
+.navList{
+  display: flex;
+  flex-direction: column;
+  height: 6rem;
+  list-style: none;
+  font-size: 2rem;
+  color: var(--main-bgNav-color);
+  align-items: center;
+}
+
+
+  @media screen and (min-width: 600px) {
+    body{
+      background-color: aqua;
+    }
+  }
+
+  @media screen and (min-width:768px){
+    body{
+      background-color: blue;
+    }
+  }
+
+  @media screen and (min-width: 992px){
+    
 .Container {
   display: flex;
   flex-direction: row;
@@ -198,6 +265,7 @@ flex-direction: column;
 align-items: center;
 padding: 1rem;
 }
+
 #recipeContainer{
   padding-top: 2rem;
   display: flex;
@@ -392,4 +460,5 @@ textarea {
     border-radius: 2rem;
     width: 10rem;
     display: none;
+  }
   }
