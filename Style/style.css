@@ -18,7 +18,7 @@ h1{
 a {
   text-decoration: none;
   text-transform: uppercase;
-  color: var(--main-bgNav-color);
+  color: var(--main-text-color);
 }
 
 button{
@@ -30,8 +30,7 @@ button{
 #mainContainer{
   display: flex;
   flex-direction: column;
-  width:100%;
-  overflow: hidden;
+  overflow:visible;
 }
 #navBar{
   display: flex;
@@ -67,14 +66,12 @@ position: fixed;
 margin-top: 0;
 }
 
-.navList{
+#navBar > .navList{
   display: flex;
   flex-direction: column;
-  height: 6rem;
   list-style: none;
   font-size: 2rem;
-  color: var(--main-bgNav-color);
-  align-items: center;
+  color:var(--main-text-color);
 }
 
 
@@ -92,62 +89,98 @@ margin-top: 0;
 
   @media screen and (min-width: 992px){
     
-.Container {
-  display: flex;
-  flex-direction: row;
-  width: 100vw;
-  background-color: var(--main-bg-color);
-}
+
 #content > section{
-  padding-left: 8rem;
   height: 100vh;
+  padding-left: 11rem;
+  width: inherit;
+  overflow: visible;
 }
 /**Navigation Bar**/
 
 .Container > nav {
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  padding: 2rem;
+  padding: 1rem;
   transition: width 0.5s ease;
   background-color: var(--main-bgNav-color);
   position: fixed;
   height: 100%;
   box-shadow: 4px 0 10px rgba(0, 0, 0, 0.3);
 }
+#navBar{
+  display: flex;
+  flex-direction:row;
+  align-items:flex-start;
+  width: 6.30vw;
+  background-color:var(--main-bgNav-color);
+  left: 0;
+}
 
-.navbar {
-  padding-right: 2rem;
+#navBar > .navbar{
+  padding-left: 0px;
+  padding-top: 4rem;
+}
+
+#timer{
+  top: 800px;
+  bottom: 0px;
+  left: 
+  25px;
+  height: 1rem;
+  display: block;
+  padding: 1rem;
+  background-color: #3e4444;
+  color: var(--main-bgNav-color);
+  font-size: 1rem;
+  z-index: 2;
+  border-radius: 2rem;
+  position: fixed;
+  border: 3px solid var(--main-bgNav-color);
 }
 
 .navbar > ul {
-  display: none;
+  display:none;
 }
-
-.navbar > ul > li {
-  padding: 0 5rem 10rem 0;
+.navbar > ul > li{
+  padding-top: 2rem;
 }
-
 #logo {
-  font-size: 3.5rem;
-  transition: font-size 2s;
-  padding-top: 10rem;
+  padding: 10rem 0;
+  font-size: 2rem;
   writing-mode: vertical-rl;
   text-orientation: upright;
+  word-wrap: normal;
+  overflow-wrap: normal;
+  word-break: normal;
+  transition: 
+    padding 2s ease-out,
+    font-size 2s ease-out,
+    writing-mode 2s ease-out,
+    text-orientation 2s ease-out,
+    word-wrap 2s ease-out,
+    overflow-wrap 2s ease-out,
+    word-break 2s ease-out;
 }
 
+nav:hover #logo {
+  padding: 5rem 0;
+  font-size: 1.5rem;
+  writing-mode: horizontal-tb;
+  text-orientation: sideways-right;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
 #logo > a{
   color: var(--main-logo-color);
   font-weight: 900;
 }
 
-.Container > nav:hover {
-  width: 10%;
-  padding: 5rem;
+#navBar:hover {
+  width: 11vw;
+  transition: width ease-out 2s;
 }
-
-
-
 nav:hover .navbar {
   display: flex;
   flex-direction: column;
@@ -155,11 +188,11 @@ nav:hover .navbar {
   color: var(--main-text-color);
 }
 
-nav:hover #logo {
-  padding: 5rem 0 5rem 0;
-  font-size: 3.5rem;
-  writing-mode: horizontal-tb;
-  text-orientation: none;
+nav:hover #timer{
+  left: 40px;
+  font-size: 2rem;
+  height: 2rem;
+  transition: left 2s ease-out, font-size 2s ease-out, height 2s ease-out;
 }
 
 nav:hover .navbar > ul {
@@ -175,24 +208,9 @@ nav:hover .navbar > ul {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: 100vw;
-  padding-left: 5rem;
+  width: auto;
 }
 
-#timer{
-  display: block;
-  padding: 1rem;
-  background-color: #3e4444;
-  margin-left: 0;
-  width: fit-content;
-  color: var(--main-bgNav-color);
-  font-size: 1rem;
-  z-index: 2;
-  border-radius: 2rem;
-  position: fixed;
-  border: 3px solid var(--main-bgNav-color);
-  margin-top: 0;
-}
 
 /** Content Styling **/
 
@@ -342,7 +360,7 @@ padding: 1rem;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: var(--background-color);
+  background-color: var(--main-text-color);
 }
 
 #recipeForm {
@@ -353,6 +371,7 @@ padding: 1rem;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 600px;
+  color: var(--main-logo-color);
 }
 
 #recipeForm h1 {
