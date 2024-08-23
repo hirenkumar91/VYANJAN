@@ -180,7 +180,7 @@ function closeButton() {
 function displayRecipes(recipes) {
   const recipeDisplay = document.getElementById("recipeContainer");
   recipeDisplay.innerHTML = recipes.map(recipe => `
-    <div class="card">
+    <div class="card" id=${recipe.id}>
       <img src="${recipe.picture_url}" alt="${recipe.title}">
       <h1>${recipe.title}</h1>
       <div class="popup-content">
@@ -197,6 +197,7 @@ function displayRecipes(recipes) {
     </div>
   `).join('');
 }
+
 function findRecipe() {
   const searchKey = document.getElementById("searchkey").value.toLowerCase().trim();
   const filteredRecipes = searchKey ? recipeObject.filter(recipe => recipe.title.toLowerCase().startsWith(searchKey)) : recipeObject;
@@ -231,7 +232,7 @@ function sortRecipesbyTitel() {
   const sortBtn = document.getElementById('sortBtn');
   const sortedRecipes = [...recipeObject].sort((a, b) => a.title.toLowerCase().localeCompare(b.title.toLowerCase()) * (isTitleAscending ? 1 : -1));
   isTitleAscending = !isTitleAscending;
-  sortBtn.textContent = isTitleAscending ? 'Z to A' : 'A to Z';
+  sortBtn.textContent = isTitleAscending ? 'Z/A' : 'A/Z';
   displayRecipes(sortedRecipes);
 }
 

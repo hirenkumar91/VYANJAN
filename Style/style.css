@@ -5,7 +5,9 @@
   --main-focus-color: #A9D888;
   --main-text-font-family: Arial, Helvetica, sans-serif;
 }
-
+html{
+  scroll-behavior: smooth;
+}
 body {
   margin: 0;
   padding: 0;
@@ -25,6 +27,8 @@ button{
   background-color: var(--main-text-color);
   color: var(--main-bgNav-color);
   border-radius: 1rem;
+  width: fit-content;
+  height: fit-content;
 }
 
 #mainContainer{
@@ -92,7 +96,7 @@ margin-top: 0;
 
 #content > section{
   height: 100vh;
-  padding-left: 11rem;
+  padding-left: 8rem;
   width: inherit;
   overflow: visible;
 }
@@ -112,7 +116,7 @@ margin-top: 0;
   display: flex;
   flex-direction:row;
   align-items:flex-start;
-  width: 6.30vw;
+  width: 6.40vw;
   background-color:var(--main-bgNav-color);
   left: 0;
 }
@@ -123,10 +127,9 @@ margin-top: 0;
 }
 
 #timer{
-  top: 800px;
-  bottom: 0px;
-  left: 
-  25px;
+  top:5px;
+  bottom: 800px;
+  left:0;
   height: 1rem;
   display: block;
   padding: 1rem;
@@ -141,6 +144,7 @@ margin-top: 0;
 
 .navbar > ul {
   display:none;
+  padding: 1rem;
 }
 .navbar > ul > li{
   padding-top: 2rem;
@@ -165,7 +169,7 @@ margin-top: 0;
 
 nav:hover #logo {
   padding: 5rem 0;
-  font-size: 1.5rem;
+  font-size: 1rem;
   writing-mode: horizontal-tb;
   text-orientation: sideways-right;
   word-wrap: break-word;
@@ -178,7 +182,7 @@ nav:hover #logo {
 }
 
 #navBar:hover {
-  width: 11vw;
+  width: 12vw;
   transition: width ease-out 2s;
 }
 nav:hover .navbar {
@@ -189,9 +193,9 @@ nav:hover .navbar {
 }
 
 nav:hover #timer{
-  left: 40px;
-  font-size: 2rem;
-  height: 2rem;
+  left: 30px;
+  font-size: 1rem;
+  height: 1rem;
   transition: left 2s ease-out, font-size 2s ease-out, height 2s ease-out;
 }
 
@@ -200,7 +204,7 @@ nav:hover .navbar > ul {
   flex-direction: column;
   list-style: none;
   font-weight: 900;
- font-size: 2rem;
+ font-size: 1rem;
  color: #1b1b1b;
 }
 
@@ -262,8 +266,7 @@ nav:hover .navbar > ul {
 }
 
 #searchBar {
-  display: flex;
-  align-items: center;
+  width: 20rem;
 }
 
 #sortbutton {
@@ -290,16 +293,17 @@ padding: 1rem;
   flex-direction: row;
   flex-wrap: wrap;
   overflow: scroll;
-  gap: 20px;
+  gap: 2rem;
   align-items: center;
 }
 
 .card {
   padding: 2rem;
-  width: 300px;
+  width: 18rem;
+  height: 20rem;
+  overflow: scroll;
   border: 1px solid #ccc;
   border-radius: 8px;
-  overflow: hidden;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   background-color: white;
   text-align: center;
@@ -346,6 +350,8 @@ padding: 1rem;
   padding: 20px;
   border-radius: 5px;
   z-index: 1000; /* Ensure it appears above other elements */
+  width: fit-content;
+  height: 20px;
 }
 
 .close-button {
