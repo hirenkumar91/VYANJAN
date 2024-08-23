@@ -55,51 +55,56 @@
           </div>
         </section>
 <!--Recipe Display-->
-        <section id="recipeSection">
-          <nav>
-            <div id="searchBar">
-              <input id="searchkey" type="text" placeholder="Type Your Search">
-            </div>
-            <div id="sortbutton">
-              <button id="sortBtn">A to Z</button>
-              <button id="sortBtnIngredients">Less Ingredients</button>
-            </div>
-           <div class="linebr"></div>
-           <!--Stopwatch-->
-            <div id="stopWatch">
-              <h1>Cooking Timer</h1>
-              <input id="cookingTime" type="number" placeholder="Insert Your Time in minuits" value= "0" required>
-              <button id="startTimer">start</button>
-              <div id="timerCountdown">00:00:00</div>
-              <div class="linebr"></div>
-              <div>
-                <div id="priceSearch">
-                  <input type="text" id="ingredientInput" placeholder="Enter ingredient name">
-                  <button id="pricesearchBtn">Search Price</button></div>
-                <p id="result"></p>
-              </div>
-              <audio id="alarmSound" src="https://www.soundbible.com/mp3/Buzzer-SoundBible.com-188422102.mp3" preload="auto"></audio>
-            </div>
-           </nav>
-          <div id="Nofind">
-            <span class="close-button" onclick="hidePopup()">&times;</span>
-            <div class="popup-message"></div>
-          </div>
-          <!-- start card for display recipe-->
-          <div class="sectionOne" id="recipeContainer">
-            
-          </div>
-          <!--End of card-->
-        </section>
+<section id="recipeSection">
+  <nav>
+    <div id="recipeSearch">
+      <div id="searchBar">
+        <input id="searchkey" type="text" placeholder="Type Your Search">
+      </div>
+      <div id="sortbutton">
+        <button id="sortBtn">A/Z</button>
+        <button id="sortBtnIngredients">Less Ingredients</button>
+      </div>
+    </div>
+    <div class="linebr"></div>
+    
+    <!-- Stopwatch -->
+    <div id="stopWatch">
+      <h1>Cooking Timer</h1>
+      <input id="cookingTime" type="number" placeholder="Insert Your Time in minutes" value="0" required>
+      <button id="startTimer">Start</button>
+      <div id="timerCountdown">00:00:00</div>
+    </div>
+    
+    <div class="linebr"></div>
+    
+    <div id="priceSearch">
+      <input type="text" id="ingredientInput" placeholder="Enter ingredient name">
+      <button id="pricesearchBtn">Search Price</button>
+    </div>
+    <p id="result"></p>
+    
+    <audio id="alarmSound" src="https://www.soundbible.com/mp3/Buzzer-SoundBible.com-188422102.mp3" preload="auto"></audio>
+  </nav>
+
+  <div id="Nofind">
+    <span class="close-button" onclick="hidePopup()">&times;</span>
+    <div class="popup-message"></div>
+  </div>
+  
+  <!-- Start card for display recipe -->
+  <div class="sectionOne" id="recipeContainer">
+    <!-- Recipes will be displayed here -->
+  </div>
+  <!-- End of card -->
+</section>
 
 
         <section id="addRecipe" >
-<!--recipe Form-->
-        
-<div id="recipeForm">
-  <h1>Post Your recipe</h1>
-
-  <form id="newRecipeform">
+          <!--recipe Form-->
+          <div id="recipeForm">
+            <h1>Post Your recipe</h1>
+            <form id="newRecipeform">
     <div id="formSubmitMessage"><p>Thank you for filling out form</p></div>
     <label for="recipeTitle">Recipe Name</label>
     <input type="text" id="recipeName" name="title" required />
@@ -137,10 +142,9 @@
 <!--End of Form-->
 </section>
       </div>
-
       </div>
       <!-- Popup Messages -->
        
   </body>
-  <script src="./scripts/index.js"></script>
+  <script src="/scripts/index.js"></script>
 </html>

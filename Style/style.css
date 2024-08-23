@@ -35,12 +35,12 @@ button{
   display: flex;
   flex-direction: column;
   overflow:visible;
+  width: 100vw;
 }
 #navBar{
   display: flex;
   flex-direction:row;
   align-items: center;
-  width: 100%;
   background-color: #447024;
 }
 
@@ -97,9 +97,9 @@ margin-top: 0;
 #content > section{
   height: 100vh;
   padding-left: 8rem;
-  width: inherit;
+  padding-bottom: 5rem;
   overflow: visible;
-}
+  width: inherit;}
 /**Navigation Bar**/
 
 .Container > nav {
@@ -205,14 +205,14 @@ nav:hover .navbar > ul {
   list-style: none;
   font-weight: 900;
  font-size: 1rem;
- color: #1b1b1b;
+ color: var(--main-text-color);
 }
 
 .Container > #content {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  width: auto;
+  flex: 1;
 }
 
 
@@ -221,6 +221,7 @@ nav:hover .navbar > ul {
 /** Home page **/
 #content > #home{
   background-color: var(--main-text-color) !important;
+  text-align: justify;
 }
 
 #home > h1{
@@ -238,12 +239,11 @@ nav:hover .navbar > ul {
   white-space: pre-wrap;
   border-right: 2px solid;
   animation: blink-caret 0.7s step-end infinite;
-  width: inherit;
-  padding-right: 2rem;
+  width: 50rem;
 }
 @keyframes blink-caret {
   from, to { border-color: transparent; }
-  50% { border-color: black; }
+  50% { border-color:var(--main-bgNav-color); }
 }
 
 
@@ -265,8 +265,9 @@ nav:hover .navbar > ul {
   padding: 20px;
 }
 
-#searchBar {
-  width: 20rem;
+#recipeSearch{
+  display:flex;
+  flex-direction: column;
 }
 
 #sortbutton {
@@ -367,6 +368,7 @@ padding: 1rem;
   align-items: center;
   height: 100vh;
   background-color: var(--main-text-color);
+  width: inherit;
 }
 
 #recipeForm {
@@ -467,7 +469,7 @@ textarea {
 
   #stopWatch{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
 
   }
