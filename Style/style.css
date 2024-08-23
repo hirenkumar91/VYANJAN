@@ -96,7 +96,7 @@ margin-top: 0;
 
 #content > section{
   height: 100vh;
-  padding-left: 8rem;
+  padding-left: 12rem;
   padding-bottom: 5rem;
   overflow: visible;
   width: inherit;}
@@ -239,7 +239,7 @@ nav:hover .navbar > ul {
   white-space: pre-wrap;
   border-right: 2px solid;
   animation: blink-caret 0.7s step-end infinite;
-  width: 50rem;
+  width:100rem;
 }
 @keyframes blink-caret {
   from, to { border-color: transparent; }
